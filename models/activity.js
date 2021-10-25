@@ -14,7 +14,8 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING
             },
             image: {
-            type: dataTypes.STRING
+            type: dataTypes.STRING,
+            allowNull: true
             },
             deleteAt: {
             type: dataTypes.DATE,
@@ -27,4 +28,4 @@ module.exports = (sequelize, dataTypes) => {
     const Activity = sequelize.define(alias, cols, config)
   
     return Activity
-  }
+  }  
