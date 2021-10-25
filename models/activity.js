@@ -23,7 +23,8 @@ module.exports = (sequelize, dataTypes) => {
             } 
         }
     let config = {
-        timestamps: true
+        timestamps: true,
+        paranoid: true
     }
     const Activity = sequelize.define(alias, cols, config)
   

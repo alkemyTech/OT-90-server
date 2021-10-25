@@ -11,13 +11,12 @@ module.exports = {
           },{
             name: 'Ayudantías',
             content: '(los que comienzan el 2do años del programa deben elegir una de las actividades que se realizan en la institución para acompañarla e ir conociendo como es el mundo laboral que les espera).'
-          },
-          
+          }          
       ], {})
 
   },
   down: async (queryInterface, Sequelize) => {
-      await queryInterface.bulkDelete('Activities', null, {});
+      await queryInterface.bulkDelete('Activities', null, {})
 
   }
 }
