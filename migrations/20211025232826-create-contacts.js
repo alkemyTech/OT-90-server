@@ -36,7 +36,7 @@ module.exports = {
         allowNull: true,
         type: Sequelize.DATE
       }
-    });
+    })
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Contacts')

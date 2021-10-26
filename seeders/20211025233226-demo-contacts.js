@@ -92,9 +92,9 @@ module.exports = {
       createdAt: new Date,
       updatedAt: null,
       deletedAt: null
-    }]);
+    }])
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('Contacts', null, {})
   }
-};
+}
