@@ -2,7 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('News', [{
+    await queryInterface.bulkInsert('Entries', [{
       name: 'nameuno',
       content: 'contenidouno',
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
