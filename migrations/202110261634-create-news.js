@@ -22,13 +22,13 @@ module.exports = {
       },
       categoryId: {
         type: Sequelize.STRING,
-        references: {
-          model: 'Category',
-          key: 'id',
-        },
-        allowNull: false,
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+ //       references: {
+ //        model: 'Category',
+ //         key: 'id',
+ //       },
+        allowNull: true,
+ //       onUpdate: 'CASCADE',
+ //       onDelete: 'SET NULL'
       },
       type: {
         type: Sequelize.STRING,
