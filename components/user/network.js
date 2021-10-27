@@ -2,8 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
-const networkUser = require('../components/user/network')
-
-router.use('/users', networkUser)
+router.get('/', (req, res) => {
+  res.send('okas')
+})
 
 module.exports = router
