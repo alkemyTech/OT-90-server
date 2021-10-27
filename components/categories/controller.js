@@ -1,7 +1,14 @@
+const store = require('./store')
+
 const getAll = async () => {
   try {
-    const categories = [{ name: 'test1' }, { name: 'test2' }]
-    return categories
+    const allCategories = await store.getAll()
+    return allCategories
+      .map((category) => (
+        {
+          name: category.name
+        }
+      ))
   } catch ({ message: error }) {
     throw new Error(error)
   }
