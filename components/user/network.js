@@ -6,6 +6,15 @@ const { body, validationResult } = require('express-validator')
 
 const controller = require('./controller')
 
+router.get('/', async (req, res) => {
+  try {
+    const users = await controller.getAll()
+    res.status(200).send(users)
+  } catch (Error) {
+    res.status(500).send({ Error: 'Something has gone wrong' })
+  }
+})
+
 router.post('/',
   body('Nombre').notEmpty(),
   body('Apellido').notEmpty(),
