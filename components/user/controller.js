@@ -13,8 +13,7 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Apellido: createdUser.lastName,
       Email: createdUser.email,
       Imagen: createdUser.image,
-      Rol: createdUser.roleId,
-      password: createdUser.password
+      Rol: createdUser.roleId
     }
     return response
   } catch ({ message: error }) {
