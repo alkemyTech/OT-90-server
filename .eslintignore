@@ -5,5 +5,7 @@ package-lock.json
 seeders/
 models/
 migrations/
-
+.github/
+.husky/
+bin/
 *.test.js
