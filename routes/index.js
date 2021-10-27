@@ -2,8 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
-const networkUser = require('../components/user/network')
+const usersNetwork = require('../components/users/network')
 
-router.use('/users', networkUser)
+router.use('/users', usersNetwork)
 
 module.exports = router
