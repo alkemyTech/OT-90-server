@@ -7,10 +7,10 @@ const { body, validationResult } = require('express-validator')
 const controller = require('./controller')
 
 router.post('/',
-  body('Email').isEmail(),
-  body('Contraseña').isLength({ min: 5 }),
   body('Nombre').notEmpty(),
   body('Apellido').notEmpty(),
+  body('Email').isEmail(),
+  body('Contraseña').isLength({ min: 5 }),
   async (req, res) => {
     const errors = validationResult(req)
     if (!errors.isEmpty()) {

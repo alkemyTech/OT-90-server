@@ -1,14 +1,20 @@
+const bcryptjs = require('bcryptjs')
 const store = require('./store')
 
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
+  const salt = bcryptjs.genSaltSync()
+  const hashedPass = bcryptjs.hashSync(password, salt)
   try {
-    const user = await store.newUser(firstName, lastName, email, password, image, roleId)
+    const createdUser = await store.newUser(firstName, lastName, email, hashedPass, image, roleId)
+
     const response = {
-      Nombre: user.firstName,
-      Apellido: user.lastName,
-      Email: user.email,
-      Imagen: user.image,
-      Rol: user.roleId
+      id: createdUser.id,
+      Nombre: createdUser.firstName,
+      Apellido: createdUser.lastName,
+      Email: createdUser.email,
+      Imagen: createdUser.image,
+      Rol: createdUser.roleId,
+      password: createdUser.password
     }
     return response
   } catch ({ message: error }) {
