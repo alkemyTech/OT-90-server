@@ -6,6 +6,7 @@ const getAll = async () => {
     return allCategories
       .map((category) => (
         {
+          id: category.id,
           name: category.name
         }
       ))
