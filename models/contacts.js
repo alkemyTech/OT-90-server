@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
     message: DataTypes.STRING,
-    deteleAt: DataTypes.STRING
+    deletedAt: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Contacts',
