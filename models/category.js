@@ -19,7 +19,8 @@ module.exports = (sequelize, DataTypes) => {
     deletedAt: DataTypes.DATE
   }, {
     sequelize,
-    modelName: 'Category'
+    modelName: 'Category',
+    timestamps: false
   })
   return Category
 }
