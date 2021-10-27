@@ -7,11 +7,11 @@ const getAll = async () => {
       .map((user) => (
         {
           id: user.id,
-          firstName: user.firstName,        
-          lastName: user.lastName,     
-          email: user.email,     
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
           image: user.image,
-          roleId: user.roleId   
+          roleId: user.roleId
         }
       ))
   } catch ({ message: error }) {
