@@ -1,9 +1,9 @@
 const express = require('express')
 
-const router = express.Router()
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.render('index', { title: 'Express' })
-})
+const router = express.Router();
+
+const usersNetwork = require('../components/users/network')
+
+router.use('/users', usersNetwork)
 
 module.exports = router
