@@ -12,4 +12,11 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.post('/', async (req, res) => {
+  controller
+    .addMember(req.body)
+    .then((message) => res.status(201).send(message))
+    .catch((error) => res.status(400).send(error))
+})
+
 module.exports = router
