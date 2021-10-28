@@ -2,9 +2,9 @@ const { Role } = require('../models')
 
 module.exports = {
   isAdmin: async (req, res, next) => {
-    const roleId = req.header('roleId')
     try {
-      const role = await Role.findByPk(roleId)
+      const { roleid } = req.headers
+      const role = await Role.findByPk(roleid)
       if (role.name === 'Admin') {
         next()
       } else {
