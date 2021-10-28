@@ -5,8 +5,8 @@ const router = express.Router()
 
 router.get('/', async (req, res) => {
   try {
-    const users = await controller.getAll()
-    res.status(200).send(users)
+    const news = await controller.getAll()
+    res.status(200).send(news)
   } catch (Error) {
     res.status(500).send({ Error: 'Something has gone wrong' })
   }

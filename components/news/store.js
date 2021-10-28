@@ -2,8 +2,8 @@ const db = require('../../models/index')
 
 const getAll = async () => {
   try {
-    const users = await db.sequelize.models.User.findAll()
-    return users
+    const news = await db.sequelize.models.Entries.findAll()
+    return news
   } catch ({ message: error }) {
     throw new Error(error)
   }

@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
+     * The models/index file will call this method automatically.
      */
     static associate(models) {
       User.belongsTo(models.Role, {as: 'role'});
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     email: DataTypes.STRING,
-    image: DataTypes.STRING,
+    image: DataTypes.TEXT,
     password: DataTypes.STRING,
     roleId: DataTypes.INTEGER,
     deletedAt: DataTypes.DATE
