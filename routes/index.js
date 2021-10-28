@@ -7,11 +7,13 @@ const membersNetwork = require('../components/members/network')
 const usersNetwork = require('../components/user/network')
 const categoriesNetwork = require('../components/categories/network')
 const news = require('../components/news/network')
+//const membersRoutes = require('../components/members/membersRoutes')
 
 router.use('/contacts', contactsNetwork)
 router.use('/members', membersNetwork)
 router.use('/users', usersNetwork)
 router.use('/categories', categoriesNetwork)
 router.use('/news', news)
+//router.use('/members', membersRoutes)
 
 module.exports = router
