@@ -9,4 +9,16 @@ const getAll = async () => {
   }
 }
 
-module.exports = { getAll }
+const addMember = async (body) => {
+  try {
+    const newMember = await db.sequelize.models.Member.create({
+      name: body.name,
+      image: body.image
+    })
+    return newMember
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+module.exports = { getAll, addMember }

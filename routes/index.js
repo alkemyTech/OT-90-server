@@ -9,9 +9,9 @@ const categoriesNetwork = require('../components/categories/network')
 const news = require('../components/news/network')
 
 router.use('/contacts', contactsNetwork)
-router.use('/members', membersNetwork)
 router.use('/users', usersNetwork)
 router.use('/categories', categoriesNetwork)
 router.use('/news', news)
+router.use('/members', membersNetwork)
 
 module.exports = router
