@@ -6,7 +6,9 @@ const { body, validationResult } = require('express-validator')
 
 const controller = require('./controller')
 
-router.get('/', async (req, res) => {
+const { isAdmin } = require('../../middleware/index')
+
+router.get('/', isAdmin, async (req, res) => {
   try {
     const users = await controller.getAll()
     res.status(200).send(users)
