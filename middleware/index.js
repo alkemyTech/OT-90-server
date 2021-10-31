@@ -1,6 +1,19 @@
+const jwt = require('jsonwebtoken')
 const { Role } = require('../models')
 
 module.exports = {
+  invalidToken: (req, res, next) => {
+    if (!req.headers.authorization) {
+      res.status(400).send('missing token')
+    }
+    try {
+      const token = req.headers.authorization.replace('Bearer ', '')
+      jwt.verify(token, process.env.TOKEN)
+      next()
+    } catch (error) {
+      res.status(400).send('invalid token')
+    }
+  },
   isAdmin: async (req, res, next) => {
     try {
       const { roleid } = req.headers
