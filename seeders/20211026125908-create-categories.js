@@ -5,11 +5,15 @@ module.exports = {
     await queryInterface.bulkInsert('Categories', [
       {
         name: 'Taller',
-        description: 'Novedades relacionadas a los talleres'
+        description: 'Novedades relacionadas a los talleres',
+        createdAt: new Date(),
+        updatedAt: new Date()
       },
       {
         name: 'Paseos',
-        description: 'Novedades relacionadas a los paseos'
+        description: 'Novedades relacionadas a los paseos',
+        createdAt: new Date(),
+        updatedAt: new Date()
       }], {})
   },
 
