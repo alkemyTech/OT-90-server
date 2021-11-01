@@ -15,7 +15,7 @@ const addNew = async (oneNew) => {
     const { image } = oneNew
     const { categoryId } = oneNew
     const { type } = oneNew
-    const createdNew = await oneNew.create({
+    const createdNew = await db.sequelize.models.Entries.create({
       name,
       content,
       image,

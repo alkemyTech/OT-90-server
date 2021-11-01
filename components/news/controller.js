@@ -8,7 +8,10 @@ const getAll = async () => {
         {
           id: singleNews.id,
           name: singleNews.name,
-          image: singleNews.image
+          conent: singleNews.content,
+          image: singleNews.image,
+          categoryId: singleNews.categoryId,
+          type: singleNews.type
         }
       ))
   } catch ({ message: error }) {
