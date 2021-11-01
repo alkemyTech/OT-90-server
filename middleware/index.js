@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const { Role } = require('../models')
 
 module.exports = {
-  invalidToken: (req, res, next) => {
+  verifyToken: (req, res, next) => {
     if (!req.headers.authorization) {
       res.status(400).send('missing token')
     }
