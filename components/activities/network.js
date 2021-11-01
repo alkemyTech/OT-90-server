@@ -1,11 +1,13 @@
 const { body, validationResult } = require('express-validator')
 const express = require('express')
 const controller = require('./controller')
+const { isAdmin } = require('../../middleware/index')
 
 const router = express.Router()
 
 router.post(
   '/',
+  isAdmin,
   body('name').notEmpty(),
   body('content').notEmpty(),
   body('name').isLength({ max: 200 }),
