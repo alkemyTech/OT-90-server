@@ -5,13 +5,15 @@ module.exports = {
     try {
       const { roleid } = req.headers
       const role = await Role.findByPk(roleid)
+      // console.log(role)
+      if (!role) throw new Error()
       if (role.name.toLowerCase().trim() === 'admin') {
         next()
       } else {
-        res.status(403).send('Your user role have not authorization to make this request')
+        throw new Error()
       }
     } catch (e) {
-      res.status(500).send('Somethins gone wrong')
+      res.status(403).send('Your user role have not authorization to make this request')
     }
   },
   validation: (schema) => async (req, res, next) => {

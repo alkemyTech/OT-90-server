@@ -1,6 +1,6 @@
 const express = require('express')
 const controller = require('./controller')
-const validate = require('../../middleware/index')
+const { validation, isAdmin } = require('../../middleware/index')
 const categorySchema = require('../../validate/categorySchema')
 
 const router = express.Router()
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/', validate.validation(categorySchema), async (req, res) => {
+router.post('/', [validation(categorySchema), isAdmin], async (req, res) => {
   controller.addCategory(req.body.name, req.body.description)
     .then((cat) => res.status(201).send(cat))
     .catch((e) => res.status(400).send(e.message))
