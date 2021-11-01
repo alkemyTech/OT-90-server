@@ -10,7 +10,7 @@ const news = require('../components/news/network')
 const organizations = require('../components/organization/network')
 const { invalidToken } = require('../middleware')
 
-router.use('/contacts', invalidToken, contactsNetwork)
+router.use('/contacts', verifyToken, contactsNetwork)
 router.use('/users', usersNetwork)
 router.use('/categories', categoriesNetwork)
 router.use('/news', news)
