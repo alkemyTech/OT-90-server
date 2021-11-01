@@ -8,7 +8,26 @@ const getAll = async () => {
     throw new Error(error)
   }
 }
+const addNew = async (oneNew) => {
+  try {
+    const { name } = oneNew
+    const { content } = oneNew
+    const { image } = oneNew
+    const { categoryId } = oneNew
+    const { type } = oneNew
+    const createdNew = await oneNew.create({
+      name,
+      content,
+      image,
+      categoryId,
+      type
+    })
+    return createdNew
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 module.exports = {
-  getAll
+  getAll, addNew
 }

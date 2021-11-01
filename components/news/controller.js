@@ -8,13 +8,22 @@ const getAll = async () => {
         {
           id: singleNews.id,
           name: singleNews.name,
-          image: singleNews.image,
-          createdAt: singleNews.createdAt // not in the table migration because not asked.
+          image: singleNews.image
         }
       ))
   } catch ({ message: error }) {
     throw new Error(error)
   }
 }
+const addNew = async (name, content, image, categoryId) => {
+  try {
+    const postNew = await store.addNew({
+      name, content, image, categoryId, type: 'news'
+    })
+    return postNew
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
-module.exports = { getAll }
+module.exports = { getAll, addNew }
