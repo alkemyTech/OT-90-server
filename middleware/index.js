@@ -5,7 +5,6 @@ module.exports = {
     try {
       const { roleid } = req.headers
       const role = await Role.findByPk(roleid)
-      // console.log(role)
       if (!role) throw new Error()
       if (role.name.toLowerCase().trim() === 'admin') {
         next()
