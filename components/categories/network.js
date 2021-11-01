@@ -1,5 +1,7 @@
 const express = require('express')
 const controller = require('./controller')
+const validate = require('../../middleware/index')
+const categorySchema = require('../../validate/categorySchema')
 
 const router = express.Router()
 
@@ -10,6 +12,12 @@ router.get('/', async (req, res) => {
   } catch (Error) {
     res.status(500).send({ Error: 'Something has gone wrong' })
   }
+})
+
+router.post('/', validate.validation(categorySchema), async (req, res) => {
+  controller.addCategory(req.body.name, req.body.description)
+    .then((cat) => res.status(201).send(cat))
+    .catch((e) => res.status(400).send(e.message))
 })
 
 module.exports = router

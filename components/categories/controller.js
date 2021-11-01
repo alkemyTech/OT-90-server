@@ -15,4 +15,9 @@ const getAll = async () => {
   }
 }
 
-module.exports = { getAll }
+const addCategory = async (name, description) => store.addCategory(name, description)
+
+module.exports = {
+  getAll,
+  addCategory
+}
