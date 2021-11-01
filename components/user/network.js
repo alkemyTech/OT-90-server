@@ -37,18 +37,17 @@ router.post('/',
       })
   })
 
-
-  router.delete('/:id', isAdmin, async (req, res) => {
-    const { params: { id } } = req
-    try {
-      const deleted = await controller.deleteUser(id)
-      if (!deleted) {
-        res.status(404).send({ Error: `Not founded a user with id ${id}` })
-        return
-      }
-      res.status(204).send()
-    } catch (Error) {
-      res.status(500).send({ Error: 'Something has gone wrong' })
+router.delete('/:id', isAdmin, async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const deleted = await controller.deleteUser(id)
+    if (!deleted) {
+      res.status(404).send({ Error: `Not founded a user with id ${id}` })
+      return
+    }
+    res.status(204).send()
+  } catch (Error) {
+    res.status(500).send({ Error: 'Something has gone wrong' })
   }
 })
 
