@@ -40,7 +40,17 @@ const getAll = async () => {
   }
 }
 
+const deleteUser = async (id) => {
+  try {
+    const deleted = await store.deleteById(id)
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   newUser,
-  getAll
+  getAll,
+  deleteUser
 }
