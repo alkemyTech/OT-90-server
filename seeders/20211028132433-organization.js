@@ -9,6 +9,9 @@ module.exports = {
         phone: '0114568923',
         address: 'Julieta Lanteri 1605',
         welcomeText: 'Bienvenidos a nuestro Portal',
+        urlFacebook: 'https://www.facebook.com/',
+        urlLinkedin: 'https://www.linkedin.com/',
+        urlInstagram: 'https://www.instagram.com/',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {})
