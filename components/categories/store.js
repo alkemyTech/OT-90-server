@@ -9,6 +9,16 @@ const getAll = async () => {
   }
 }
 
+const deleteById = async (id) => {
+  try {
+    const deleted = await db.sequelize.models.Category.destroy({ where: { id } })
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  getAll
+  getAll,
+  deleteById
 }
