@@ -42,7 +42,7 @@ router.delete('/:id', isAdmin, async (req, res) => {
   try {
     const deleted = await controller.deleteUser(id)
     if (!deleted) {
-      res.status(404).send({ Error: `Not founded a user with id ${id}` })
+      res.status(404).send({ Error: `A user with that ${id} was not found` })
       return
     }
     res.status(204).send()
