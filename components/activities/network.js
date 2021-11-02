@@ -4,6 +4,7 @@ const { isAdmin, validation } = require('../../middleware/index')
 const { categoryPostSchema } = require('./schema')
 
 const router = express.Router()
+const response = { success: true, body: null }
 
 router.post(
   '/',
@@ -12,12 +13,12 @@ router.post(
   async (req, res) => {
     try {
       const activity = await controller.addActivity(req.body.name, req.body.content)
-      return res.status(201).send({
-        message: 'Activity succesfully created',
-        activity
-      })
+      response.body = activity
+      return res.status(201).send(response)
     } catch (e) {
-      return res.status(500).send({ error: e })
+      response.success = false
+      response.body = e
+      return res.status(500).send(response)
     }
   }
 )
