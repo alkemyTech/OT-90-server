@@ -9,8 +9,6 @@ const categoriesNetwork = require('../components/categories/network')
 const news = require('../components/news/network')
 const organizations = require('../components/organization/network')
 
-const { invalidToken } = require('../middleware')
-
 const pong = require('../components/pong/network')
 const activitiesNetwork = require('../components/activities/network')
 const marketingNetwork = require('../components/marketing/network')
