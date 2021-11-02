@@ -9,6 +9,16 @@ const getAll = async () => {
   }
 }
 
+const getById = async (id) => {
+  try {
+    const news = await await db.sequelize.models.Entries.findOne({ where: { id } })
+    return news
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  getAll
+  getAll,
+  getById
 }
