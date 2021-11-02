@@ -20,13 +20,22 @@ module.exports = (sequelize, dataTypes) => {
             deleteAt: {
             type: dataTypes.DATE,
             allowNull: true
-            } 
+            },
+            createdAt: {
+            allowNull: false,
+            type: dataTypes.DATE
+            },
+            updatedAt: {
+            allowNull: false,
+            type: dataTypes.DATE
+            }
         }
     let config = {
-        timestamps: false,
+        timestamps: true,
         paranoid: true
     }
     const Activity = sequelize.define(alias, cols, config)
   
     return Activity
-  }  
+  }
+  
