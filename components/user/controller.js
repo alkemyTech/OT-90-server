@@ -1,4 +1,5 @@
 const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 const store = require('./store')
 
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
@@ -7,7 +8,7 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
   try {
     const createdUser = await store.newUser(firstName, lastName, email, hashedPass, image, roleId)
 
-    const response = {
+    const userData = {
       id: createdUser.id,
       Nombre: createdUser.firstName,
       Apellido: createdUser.lastName,
@@ -15,7 +16,8 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Imagen: createdUser.image,
       Rol: createdUser.roleId
     }
-    return response
+
+    return jwt.sign(userData, process.env.TOKEN)
   } catch ({ message: error }) {
     throw new Error(error)
   }
