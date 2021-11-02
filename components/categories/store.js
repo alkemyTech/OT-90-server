@@ -22,7 +22,17 @@ const addCategory = async (name, description) => {
   }
 }
 
+const deleteById = async (id) => {
+  try {
+    const deleted = await Category.destroy({ where: { id } })
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getAll,
-  addCategory
+  addCategory,
+  deleteById
 }

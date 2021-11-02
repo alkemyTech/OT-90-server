@@ -20,4 +20,18 @@ router.post('/', [validation(categorySchema), isAdmin], async (req, res) => {
     .catch((e) => res.status(400).send(e.message))
 })
 
+router.delete('/:id', isAdmin, async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const deleted = await controller.deleteCategory(id)
+    if (!deleted) {
+      res.status(404).send({ Error: `Not founded a category with id ${id}` })
+      return
+    }
+    res.status(204).send()
+  } catch (Error) {
+    res.status(500).send({ Error: 'Something has gone wrong' })
+  }
+})
+
 module.exports = router
