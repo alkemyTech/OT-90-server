@@ -14,11 +14,11 @@ router.post(
     try {
       const activity = await controller.addActivity(req.body.name, req.body.content)
       response.body = activity
-      return res.status(201).send(response)
+      return res.status(201).json(response)
     } catch (e) {
       response.success = false
       response.body = e
-      return res.status(500).send(response)
+      return res.status(500).json(response)
     }
   }
 )
