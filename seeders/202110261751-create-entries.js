@@ -8,7 +8,8 @@ module.exports = {
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
       categoryId: 1,
       type: 'event',
-      deletedAt: new Date,
+      createdAt: new Date(),
+      updatedAt: new Date()
     },
     {
       name: 'namedos',
@@ -16,7 +17,8 @@ module.exports = {
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
       categoryId: 2,
       type: 'news',
-      deletedAt: new Date,
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
   },
 
