@@ -29,4 +29,14 @@ const addNew = async (name, content, image, categoryId) => {
   }
 }
 
-module.exports = { getAll, addNew }
+const getNewsById = async (id) => {
+  try {
+    const { dataValues: news } = await store.getById(id) || { dataValues: {} }
+    return news
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+module.exports = { getAll, getNewsById,addNew }
+

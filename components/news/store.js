@@ -28,6 +28,17 @@ const addNew = async (oneNew) => {
   }
 }
 
+const getById = async (id) => {
+  try {
+    const news = await await db.sequelize.models.Entries.findOne({ where: { id } })
+    return news
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  getAll, addNew
+  getAll,
+  getById,
+  addNew
 }
