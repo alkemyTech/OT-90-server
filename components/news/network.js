@@ -1,9 +1,10 @@
-const { body, validationResult } = require('express-validator')
 const express = require('express')
 const controller = require('./controller')
-const { isAdmin } = require('../../middleware/index')
+const { isAdmin, validation } = require('../../middleware/index')
+const { newsPostSchema } = require('./schema')
 
 const router = express.Router()
+const response = { success: true, body: null }
 
 router.get('/', async (req, res) => {
   try {
@@ -14,26 +15,21 @@ router.get('/', async (req, res) => {
   }
 })
 router.post('/', isAdmin,
-  body('name').notEmpty().isLength({ max: 200 }),
-  body('content').notEmpty(),
+  validation(newsPostSchema),
   async (req, res) => {
     try {
-      const errors = validationResult(req)
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() })
-      }
       const postNew = await controller.addNew(
         req.body.name,
         req.body.content,
         req.body.image,
         req.body.categoryId
       )
-      return res.status(201).send({
-        message: 'New created',
-        postNew
-      })
-    } catch (error) {
-      return res.status(500).send({ error })
+      response.body = postNew
+      return res.status(201).send(response)
+    } catch (e) {
+      response.success = false
+      response.body = e
+      return res.status(500).send(response)
     }
   })
 
