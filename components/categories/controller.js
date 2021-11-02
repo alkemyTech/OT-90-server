@@ -15,4 +15,13 @@ const getAll = async () => {
   }
 }
 
-module.exports = { getAll }
+const deleteCategory = async (id) => {
+  try {
+    const deleted = await store.deleteById(id)
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+module.exports = { getAll, deleteCategory }

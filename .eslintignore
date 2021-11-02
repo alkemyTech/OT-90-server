@@ -9,3 +9,4 @@ migrations/
 .husky/
 bin/
 *.test.js
+*.spec.js
