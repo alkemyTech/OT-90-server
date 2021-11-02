@@ -3,12 +3,13 @@ const yup = require('yup')
 const newsPostSchema = yup.object({
   body: yup.object({
     name: yup
-      .string()
-      .required()
-      .max(200),
+      .string().required().max(200),
     content: yup
-      .string()
-      .required()
+      .string().required(),
+    image: yup
+      .string(),
+    categoryId: yup
+      .number()
   })
 })
 
