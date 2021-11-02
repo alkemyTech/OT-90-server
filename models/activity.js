@@ -17,10 +17,18 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING,
             allowNull: true
             },
-            deleteAt: {
+            deletedAt: {
             type: dataTypes.DATE,
             allowNull: true
-            } 
+            },
+            createdAt: {
+            allowNull: false,
+            type: dataTypes.DATE
+            },
+            updatedAt: {
+            allowNull: false,
+            type: dataTypes.DATE
+            }
         }
     let config = {
         timestamps: true,
@@ -29,4 +37,5 @@ module.exports = (sequelize, dataTypes) => {
     const Activity = sequelize.define(alias, cols, config)
   
     return Activity
-  }  
+  }
+  
