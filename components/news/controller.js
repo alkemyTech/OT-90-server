@@ -38,5 +38,4 @@ const getNewsById = async (id) => {
   }
 }
 
-module.exports = { getAll, getNewsById,addNew }
-
+module.exports = { getAll, getNewsById, addNew }
