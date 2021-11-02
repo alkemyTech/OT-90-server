@@ -1,7 +1,7 @@
 const express = require('express')
 const controller = require('./controller')
 const { isAdmin, validation } = require('../../middleware/index')
-const { categoryPostSchema } = require('./schema')
+const { categoryPostSchema } = require('../../validate/activitySchema')
 
 const router = express.Router()
 const response = { success: true, body: null }
