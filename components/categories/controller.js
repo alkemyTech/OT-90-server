@@ -15,6 +15,8 @@ const getAll = async () => {
   }
 }
 
+const addCategory = async (name, description) => store.addCategory(name, description)
+
 const deleteCategory = async (id) => {
   try {
     const deleted = await store.deleteById(id)
@@ -24,4 +26,8 @@ const deleteCategory = async (id) => {
   }
 }
 
-module.exports = { getAll, deleteCategory }
+module.exports = {
+  getAll,
+  deleteCategory,
+  addCategory
+}

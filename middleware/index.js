@@ -21,10 +21,10 @@ module.exports = {
       if (role && role.name.toLowerCase().trim() === 'admin') {
         next()
       } else {
-        res.status(403).send('Your user role have not authorization to make this request')
+        throw new Error()
       }
     } catch (e) {
-      res.status(500).send('Somethins gone wrong')
+      res.status(403).send('Your user role have not authorization to make this request')
     }
   },
   validation: (schema) => async (req, res, next) => {
