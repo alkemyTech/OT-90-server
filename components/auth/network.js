@@ -5,8 +5,12 @@ const { authMe } = require('./controller')
 const router = express.Router()
 
 router.get('/me', verifyToken, async (req, res) => {
-  const response = authMe(req.token)
-  res.json(response)
+  try {
+    const response = authMe(req.token)
+    res.status(200).json(response)
+  } catch (e) {
+    res.send(400).json({ success: false, body: e })
+  }
 })
 
 module.exports = router

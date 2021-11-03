@@ -12,7 +12,7 @@ module.exports = {
       req.token = decripted
       next()
     } catch (error) {
-      res.status(400).send('invalid token')
+      res.status(400).json({ success: false, body: error })
     }
   },
   isAdmin: async (req, res, next) => {
