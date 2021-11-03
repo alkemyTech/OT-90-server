@@ -45,14 +45,14 @@ router.delete('/:id', isAdmin, async (req, res) => {
     const deleted = await controller.deleteUser(id)
     if (!deleted) {
       response.success = false
-      response.body = { Error: `A user with that ${id} was not found` }
+      response.body = { error: `A user with that ${id} was not found` }
       return res.status(404).json(response)
     }
     response.body = {}
     return res.status(204).json(response)
   } catch (Error) {
     response.success = false
-    response.body = { Error: 'Something has gone wrong' }
+    response.body = { error: 'Something has gone wrong' }
     return res.status(500).json(response)
   }
 })
