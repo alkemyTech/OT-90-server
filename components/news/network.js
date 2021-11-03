@@ -5,7 +5,6 @@ const { newsPostSchema } = require('../../validate/newsSchema')
 const { newsPutSchema } = require('../../validate/newsSchema')
 
 const router = express.Router()
-const response = { success: true, body: null }
 
 router.get('/', async (req, res) => {
   try {
@@ -19,18 +18,15 @@ router.post('/', isAdmin,
   validation(newsPostSchema),
   async (req, res) => {
     try {
-      const postNew = await controller.addNew(
+      const response = await controller.addNew(
         req.body.name,
         req.body.content,
         req.body.image,
         req.body.categoryId
       )
-      response.body = postNew
       return res.status(201).send(response)
-    } catch (e) {
-      response.success = false
-      response.body = e
-      return res.status(500).send(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
     }
   })
 
@@ -49,15 +45,12 @@ router.put('/:id', isAdmin,
   async (req, res) => {
     const { params: { id } } = req
     try {
-      const putNew = await controller.modifyNew(
+      const response = await controller.modifyNew(
         id, req.body
       )
-      response.body = putNew
       return res.status(201).send(response)
-    } catch (e) {
-      response.success = false
-      response.body = e
-      return res.status(500).send(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
     }
   })
 
