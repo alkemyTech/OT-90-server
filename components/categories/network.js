@@ -5,6 +5,8 @@ const categorySchema = require('../../validate/categorySchema')
 
 const router = express.Router()
 
+const response = { success: true, body: null }
+
 router.get('/', async (req, res) => {
   try {
     const categories = await controller.getAll()
@@ -31,6 +33,25 @@ router.delete('/:id', isAdmin, async (req, res) => {
     res.status(204).send()
   } catch (Error) {
     res.status(500).send({ Error: 'Something has gone wrong' })
+  }
+})
+
+router.put('/:id', [isAdmin, validation(categorySchema)], async (req, res) => {
+  const { params: { id }, body } = req
+  try {
+    const updated = await controller.updateCategory(id, body)
+    if (!updated[0]) {
+      response.success = false
+      response.body = { Error: `Not founded a category with id ${id}` }
+      res.status(400).json(response)
+      return
+    }
+    response.body = { ...body, id }
+    res.status(200).json(response)
+  } catch (Error) {
+    response.success = false
+    response.body = Error
+    res.status(500).json(response)
   }
 })
 
