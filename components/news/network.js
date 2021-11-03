@@ -24,7 +24,7 @@ router.post('/', isAdmin,
         req.body.image,
         req.body.categoryId
       )
-      return res.status(201).send(response)
+      return res.status(201).json(response)
     } catch (failedResponse) {
       return res.status(500).json(failedResponse)
     }
@@ -48,7 +48,7 @@ router.put('/:id', isAdmin,
       const response = await controller.modifyNew(
         id, req.body
       )
-      return res.status(201).send(response)
+      return res.status(201).json(response)
     } catch (failedResponse) {
       return res.status(500).json(failedResponse)
     }
