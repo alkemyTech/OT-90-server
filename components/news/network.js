@@ -9,9 +9,9 @@ const response = { success: true, body: null }
 router.get('/', async (req, res) => {
   try {
     const news = await controller.getAll()
-    res.status(200).send(news)
+    res.status(200).json(news)
   } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    res.status(500).json({ Error: 'Something has gone wrong' })
   }
 })
 
@@ -19,9 +19,9 @@ router.get('/:id', async (req, res) => {
   const { params: { id } } = req
   try {
     const news = await controller.getNewsById(id)
-    res.status(200).send(news)
+    res.status(200).json(news)
   } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    res.status(500).json({ Error: 'Something has gone wrong' })
   }
 })
 
@@ -36,16 +36,21 @@ router.post('/', isAdmin,
         req.body.categoryId
       )
       response.body = postNew
-      return res.status(201).send(response)
+      return res.status(201).json(response)
     } catch (e) {
       response.success = false
       response.body = e
-      return res.status(500).send(response)
+      return res.status(500).json(response)
     }
   })
 
-router.delete('/:id', async (req, res) => {
-  res.json('ok')
+router.delete('/:id', isAdmin, async (req, res) => {
+  try {
+    await controller.deleteNew(req.params.id)
+    res.status(204).json()
+  } catch (e) {
+    res.status(400).json(e)
+  }
 })
 
 module.exports = router

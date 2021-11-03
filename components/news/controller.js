@@ -38,4 +38,21 @@ const getNewsById = async (id) => {
   }
 }
 
-module.exports = { getAll, getNewsById, addNew }
+const deleteNew = async (newId) => {
+  try {
+    const deletedNew = await store.deleteNew(newId)
+    return deletedNew
+  } catch ({ message: error }) {
+    const response = {}
+    response.success = false
+    response.body = { error }
+    throw response
+  }
+}
+
+module.exports = {
+  getAll,
+  getNewsById,
+  addNew,
+  deleteNew
+}

@@ -8,6 +8,16 @@ const getAll = async () => {
     throw new Error(error)
   }
 }
+
+const getById = async (id) => {
+  try {
+    const news = await await Entries.findOne({ where: { id } })
+    return news
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const addNew = async (oneNew) => {
   try {
     const { name } = oneNew
@@ -23,15 +33,16 @@ const addNew = async (oneNew) => {
       type
     })
     return createdNew
-  } catch (error) {
+  } catch ({ message: error }) {
     throw new Error(error)
   }
 }
 
-const getById = async (id) => {
+const deleteNew = async (newId) => {
   try {
-    const news = await await Entries.findOne({ where: { id } })
-    return news
+    const deletedNew = await Entries.destroy({ where: { id: newId } })
+    if (deletedNew === 0) throw new Error('Entrie not found')
+    return deletedNew
   } catch ({ message: error }) {
     throw new Error(error)
   }
@@ -40,5 +51,6 @@ const getById = async (id) => {
 module.exports = {
   getAll,
   getById,
-  addNew
+  addNew,
+  deleteNew
 }
