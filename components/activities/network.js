@@ -4,7 +4,6 @@ const { isAdmin, validation } = require('../../middleware/index')
 const { activityPostSchema } = require('../../validate/activitySchema')
 
 const router = express.Router()
-const response = { success: true, body: null }
 
 router.post(
   '/',
@@ -12,13 +11,10 @@ router.post(
   validation(activityPostSchema),
   async (req, res) => {
     try {
-      const activity = await controller.addActivity(req.body.name, req.body.content)
-      response.body = activity
+      const response = await controller.addActivity(req.body.name, req.body.content)
       return res.status(201).json(response)
-    } catch (e) {
-      response.success = false
-      response.body = e
-      return res.status(500).json(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
     }
   }
 )

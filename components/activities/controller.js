@@ -1,12 +1,19 @@
 const store = require('./store')
 
+const response = { success: true, body: null }
+
 const addActivity = async (name, content) => {
   try {
-    const newActivity = await store.addActivity({ name, content })
-    return newActivity
+    response.success = true
+    response.body = await store.addActivity({ name, content })
+    return response
   } catch (error) {
-    throw new Error(error)
+    response.success = false
+    response.body = { error: error.message }
+    throw response
   }
 }
 
-module.exports = { addActivity }
+module.exports = {
+  addActivity
+}
