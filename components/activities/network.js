@@ -26,7 +26,23 @@ router.put(
   async (req, res) => {
     try {
       const { id } = req.params
-      return res.status(200).json(id)
+      const activityResponse = await controller.getById(id)
+
+      if (!activityResponse.success) {
+        return res.status(404).json(activityResponse)
+      }
+
+      const activity = activityResponse.body
+      if (req.body.name) {
+        activity.name = req.body.name
+      }
+
+      if (req.body.content) {
+        activity.content = req.body.content
+      }
+
+      const response = await controller.updateActivity(activity)
+      return res.status(200).json(response)
     } catch (failedResponse) {
       return res.status(500).json(failedResponse)
     }

@@ -14,6 +14,39 @@ const addActivity = async (name, content) => {
   }
 }
 
+const getById = async (id) => {
+  try {
+    const activity = await store.getById(id)
+    if (activity) {
+      response.success = true
+      response.body = activity
+    } else {
+      response.success = false
+      response.body = `Activity (ID: ${id}) Not Found`
+    }
+    return response
+  } catch (error) {
+    response.success = false
+    response.body = { error: error.message }
+    throw response
+  }
+}
+
+const updateActivity = async (activity) => {
+  try {
+    await store.updateActivity(activity)
+    response.success = true
+    response.body = activity
+    return response
+  } catch (error) {
+    response.success = false
+    response.body = { error: error.message }
+    throw response
+  }
+}
+
 module.exports = {
-  addActivity
+  addActivity,
+  getById,
+  updateActivity
 }
