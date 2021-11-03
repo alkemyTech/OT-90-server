@@ -8,6 +8,25 @@ const getAll = async () => {
     throw new Error(error)
   }
 }
+const addNew = async (oneNew) => {
+  try {
+    const { name } = oneNew
+    const { content } = oneNew
+    const { image } = oneNew
+    const { categoryId } = oneNew
+    const { type } = oneNew
+    const createdNew = await db.sequelize.models.Entries.create({
+      name,
+      content,
+      image,
+      categoryId,
+      type
+    })
+    return createdNew
+  } catch (error) {
+    throw new Error(error)
+  }
+}
 
 const getById = async (id) => {
   try {
@@ -20,5 +39,6 @@ const getById = async (id) => {
 
 module.exports = {
   getAll,
-  getById
+  getById,
+  addNew
 }
