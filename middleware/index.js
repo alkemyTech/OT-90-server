@@ -4,7 +4,7 @@ const { Role } = require('../models')
 module.exports = {
   verifyToken: (req, res, next) => {
     if (!req.headers.authorization) {
-      return res.status(400).send({ success: false, body: 'missing token' })
+      return res.status(400).json({ success: false, body: 'missing token' })
     }
     try {
       const token = req.headers.authorization.replace('Bearer ', '')
