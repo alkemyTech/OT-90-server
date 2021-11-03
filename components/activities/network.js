@@ -1,7 +1,7 @@
 const express = require('express')
 const controller = require('./controller')
 const { isAdmin, validation } = require('../../middleware/index')
-const { categoryPostSchema } = require('../../validate/activitySchema')
+const { activityPostSchema } = require('../../validate/activitySchema')
 
 const router = express.Router()
 const response = { success: true, body: null }
@@ -9,7 +9,7 @@ const response = { success: true, body: null }
 router.post(
   '/',
   isAdmin,
-  validation(categoryPostSchema),
+  validation(activityPostSchema),
   async (req, res) => {
     try {
       const activity = await controller.addActivity(req.body.name, req.body.content)

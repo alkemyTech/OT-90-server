@@ -1,6 +1,6 @@
 const yup = require('yup')
 
-const categoryPostSchema = yup.object({
+const activityPostSchema = yup.object({
   body: yup.object({
     name: yup
       .string()
@@ -13,4 +13,18 @@ const categoryPostSchema = yup.object({
   })
 })
 
-module.exports = { categoryPostSchema }
+const activityPutSchema = yup.object({
+  body: yup.object({
+    name: yup
+      .string()
+      .max(200),
+    content: yup
+      .string()
+      .max(255)
+  })
+})
+
+module.exports = {
+  activityPostSchema,
+  activityPutSchema
+}
