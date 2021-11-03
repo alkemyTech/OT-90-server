@@ -25,7 +25,7 @@ module.exports = {
         throw new Error()
       }
     } catch (e) {
-      res.status(403).send('Your user role have not authorization to make this request')
+      res.status(403).json({ success: false, body: 'Your user role have not authorization to make this request' })
     }
   },
   validation: (schema) => async (req, res, next) => {
