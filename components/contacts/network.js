@@ -1,6 +1,8 @@
 const express = require('express')
 
-const { body, validationResult } = require('express-validator')
+const { validation, isAdmin } = require('../../middleware/index')
+
+const { contactPostSchema } = require('../../validate/contactSchema')
 
 const controller = require('./controller')
 
@@ -15,21 +17,19 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/',
-  body('name').notEmpty(),
-  body('email').isEmail(),
+router.post('/', [validation(contactPostSchema), isAdmin],
   async (req, res) => {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
-    }
     const {
       name, phone, email, message
     } = req.body
-    return controller.addCont(name, phone, email, message)
-      .then((response) => res.status(201).send(response))
-      .catch(({ message: error }) => {
-        res.status(400).send(error)
+    await controller.addCont(name, phone, email, message)
+      .then((contact) => res.status(201).json(contact))
+      .catch((e) => {
+        const error = {
+          success: false,
+          body: e.message
+        }
+        res.status(400).json(error)
       })
   })
 

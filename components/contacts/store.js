@@ -22,7 +22,7 @@ const addCont = async (name, phone, email, message) => {
       message
     })
 
-    return createdContacts
+    return { createdContacts, Error }
   } catch ({ message: error }) {
     throw new Error(error)
   }

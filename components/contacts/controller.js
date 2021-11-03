@@ -18,17 +18,9 @@ const getAll = async () => {
 const addCont = async (name, phone, email, message) => {
   try {
     const newCont = await store.addCont(name, phone, email, message)
-
-    const res = {
-      id: newCont.id,
-      name: newCont.name,
-      phone: newCont.phone,
-      email: newCont.email,
-      message: newCont.message
-    }
-    return res
-  } catch ({ message: error }) {
-    throw new Error(error)
+    return newCont
+  } catch (error) {
+    throw new Error(error.message)
   }
 }
 
