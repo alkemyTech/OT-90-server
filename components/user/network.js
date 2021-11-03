@@ -6,6 +6,8 @@ const { body, validationResult } = require('express-validator')
 
 const controller = require('./controller')
 
+const response = { success: true, body: null }
+
 const { isAdmin } = require('../../middleware/index')
 
 router.get('/', isAdmin, async (req, res) => {
@@ -42,12 +44,16 @@ router.delete('/:id', isAdmin, async (req, res) => {
   try {
     const deleted = await controller.deleteUser(id)
     if (!deleted) {
-      res.status(404).send({ Error: `A user with that ${id} was not found` })
-      return
+      response.success = false
+      response.body = { Error: `A user with that ${id} was not found` }
+      return res.status(404).json(response)
     }
-    res.status(204).send()
+    response.body = {}
+    return res.status(204).json(response)
   } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    response.success = false
+    response.body = { Error: 'Something has gone wrong' }
+    return res.status(500).json(response)
   }
 })
 
