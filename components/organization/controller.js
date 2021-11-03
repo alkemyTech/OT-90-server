@@ -9,7 +9,10 @@ const getAll = async (orgID) => {
       image: organization.image,
       phone: organization.phone,
       address: organization.address,
-      welcomeText: organization.welcomeText
+      welcomeText: organization.welcomeText,
+      urlFacebook: organization.urlFacebook,
+      urlLinkedin: organization.urlLinkedin,
+      urlInstagram: organization.urlInstagram
     }
     return response
   } catch ({ message: error }) {
