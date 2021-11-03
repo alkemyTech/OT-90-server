@@ -46,8 +46,8 @@ router.post('/', isAdmin,
 
 router.delete('/:id', isAdmin, async (req, res) => {
   try {
-    response.body = await controller.deleteNew(req.params.id)
-    res.status(200).json(response)
+    await controller.deleteNew(req.params.id)
+    res.status(204).json()
   } catch (e) {
     res.status(400).json(e)
   }
