@@ -16,8 +16,14 @@ router.get('/', async (req, res) => {
 
 router.post('/', [validation(categorySchema), isAdmin], async (req, res) => {
   controller.addCategory(req.body.name, req.body.description)
-    .then((cat) => res.status(201).send(cat))
-    .catch((e) => res.status(400).send(e.message))
+    .then((cat) => res.status(201).json(cat))
+    .catch((e) => {
+      const error = {
+        success: false,
+        body: e.message
+      }
+      res.status(400).json(error)
+    })
 })
 
 router.delete('/:id', isAdmin, async (req, res) => {
