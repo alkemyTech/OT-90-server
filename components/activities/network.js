@@ -1,24 +1,50 @@
 const express = require('express')
 const controller = require('./controller')
 const { isAdmin, validation } = require('../../middleware/index')
-const { categoryPostSchema } = require('../../validate/activitySchema')
+const { activityPostSchema, activityPutSchema } = require('../../validate/activitySchema')
 
 const router = express.Router()
-const response = { success: true, body: null }
 
 router.post(
   '/',
   isAdmin,
-  validation(categoryPostSchema),
+  validation(activityPostSchema),
   async (req, res) => {
     try {
-      const activity = await controller.addActivity(req.body.name, req.body.content)
-      response.body = activity
+      const response = await controller.addActivity(req.body.name, req.body.content)
       return res.status(201).json(response)
-    } catch (e) {
-      response.success = false
-      response.body = e
-      return res.status(500).json(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
+    }
+  }
+)
+
+router.put(
+  '/:id',
+  isAdmin,
+  validation(activityPutSchema),
+  async (req, res) => {
+    try {
+      const { id } = req.params
+      const activityResponse = await controller.getById(id)
+
+      if (!activityResponse.success) {
+        return res.status(404).json(activityResponse)
+      }
+
+      const activity = activityResponse.body
+      if (req.body.name) {
+        activity.name = req.body.name
+      }
+
+      if (req.body.content) {
+        activity.content = req.body.content
+      }
+
+      const response = await controller.updateActivity(activity)
+      return res.status(200).json(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
     }
   }
 )
