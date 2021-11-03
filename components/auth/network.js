@@ -9,7 +9,7 @@ router.get('/me', verifyToken, async (req, res) => {
     const response = authMe(req.token)
     res.status(200).json(response)
   } catch (e) {
-    res.send(400).json({ success: false, body: e })
+    res.status(400).json({ success: false, body: e })
   }
 })
 

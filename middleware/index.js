@@ -4,15 +4,15 @@ const { Role } = require('../models')
 module.exports = {
   verifyToken: (req, res, next) => {
     if (!req.headers.authorization) {
-      res.status(400).send('missing token')
+      return res.status(400).send({ success: false, body: 'missing token' })
     }
     try {
       const token = req.headers.authorization.replace('Bearer ', '')
       const decripted = jwt.verify(token, process.env.TOKEN)
       req.token = decripted
-      next()
+      return next()
     } catch (error) {
-      res.status(400).json({ success: false, body: error })
+      return res.status(400).json({ success: false, body: error })
     }
   },
   isAdmin: async (req, res, next) => {
