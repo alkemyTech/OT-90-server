@@ -38,4 +38,20 @@ const getNewsById = async (id) => {
   }
 }
 
-module.exports = { getAll, getNewsById, addNew }
+const modifyNew = async (id, reqBody) => {
+  try {
+    const {
+      name, content, image, categoryId
+    } = reqBody
+    const putNew = await store.modifyNew({
+      id, name, content, image, categoryId
+    })
+    return putNew
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+module.exports = {
+  getAll, getNewsById, addNew, modifyNew
+}
