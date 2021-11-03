@@ -8,7 +8,8 @@ module.exports = {
     }
     try {
       const token = req.headers.authorization.replace('Bearer ', '')
-      jwt.verify(token, process.env.TOKEN)
+      const decripted = jwt.verify(token, process.env.TOKEN)
+      req.token = decripted
       next()
     } catch (error) {
       res.status(400).send('invalid token')

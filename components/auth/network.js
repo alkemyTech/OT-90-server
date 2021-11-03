@@ -1,10 +1,12 @@
 const express = require('express')
-// const controller = require('./controller')
+const { verifyToken } = require('../../middleware/index')
+const { authMe } = require('./controller')
 
 const router = express.Router()
 
-router.get('/me', async (req, res) => {
-  res.json('ok')
+router.get('/me', verifyToken, async (req, res) => {
+  const response = authMe(req.token)
+  res.json(response)
 })
 
 module.exports = router
