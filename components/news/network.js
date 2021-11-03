@@ -1,7 +1,7 @@
 const express = require('express')
 const controller = require('./controller')
 const { isAdmin, validation } = require('../../middleware/index')
-const { newsPostSchema } = require('./schema')
+const { newsPostSchema } = require('../../validate/newsSchema')
 
 const router = express.Router()
 const response = { success: true, body: null }
@@ -14,6 +14,17 @@ router.get('/', async (req, res) => {
     res.status(500).send({ Error: 'Something has gone wrong' })
   }
 })
+
+router.get('/:id', async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const news = await controller.getNewsById(id)
+    res.status(200).send(news)
+  } catch (Error) {
+    res.status(500).send({ Error: 'Something has gone wrong' })
+  }
+})
+
 router.post('/', isAdmin,
   validation(newsPostSchema),
   async (req, res) => {
@@ -33,14 +44,8 @@ router.post('/', isAdmin,
     }
   })
 
-router.get('/:id', async (req, res) => {
-  const { params: { id } } = req
-  try {
-    const news = await controller.getNewsById(id)
-    res.status(200).send(news)
-  } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
-  }
+router.delete('/:id', async (req, res) => {
+  res.json('ok')
 })
 
 module.exports = router
