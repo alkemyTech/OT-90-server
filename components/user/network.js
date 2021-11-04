@@ -9,8 +9,6 @@ const { userSchema } = require('../../validate/userSchema')
 
 const response = { success: true, body: null }
 
-const { isAdmin } = require('../../middleware/index')
-
 router.get('/', isAdmin, async (req, res) => {
   try {
     const users = await controller.getAll()
