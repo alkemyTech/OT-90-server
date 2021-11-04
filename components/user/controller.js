@@ -2,6 +2,8 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const store = require('./store')
 
+const { sendMail } = require('../marketing/index')
+
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
   const salt = bcryptjs.genSaltSync()
   const hashedPass = bcryptjs.hashSync(password, salt)
@@ -16,6 +18,24 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Imagen: createdUser.image,
       Rol: createdUser.roleId
     }
+    const mail = {
+      email: createdUser.email,
+      subject: 'Bienvenid@ a Somos Mas ONG',
+      msg: `
+      <h2>Gracias por registrarte en <strong>Somos Más</strong></h2>
+      <hr>
+      <h3>Este es un mensaje de agradecimiento</h3>
+      <p>
+        <ul>
+          <li>Sumate</>
+          <li>Colaborá</>
+          <li>Participá</>
+        </ul>
+      </p>
+      <footer>SomosMas.ong</footer>
+      `
+    }
+    await sendMail(mail)
 
     return jwt.sign(userData, process.env.JWT_SECRET_KEY)
   } catch ({ message: error }) {
