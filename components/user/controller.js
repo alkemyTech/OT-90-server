@@ -2,6 +2,8 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const store = require('./store')
 
+const { sendMail } = require('../marketing/index')
+
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
   const salt = bcryptjs.genSaltSync()
   const hashedPass = bcryptjs.hashSync(password, salt)
@@ -16,6 +18,12 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Imagen: createdUser.image,
       Rol: createdUser.roleId
     }
+    const mail = {
+      Email: createdUser.email,
+      Subject: 'Bienvenid@ a Somos Mas ONG',
+      Msg: 'Gracias por registrarse'
+    }
+    await sendMail(mail)
 
     return jwt.sign(userData, process.env.JWT_SECRET_KEY)
   } catch ({ message: error }) {
