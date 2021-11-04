@@ -7,7 +7,7 @@ const authUser = async (email, password) => {
     const authUser = await store.authUser(email, password)
     const hashedSaved = authUser.dataValues.password
     const comparePassword = bcryptjs.compareSync(password, hashedSaved)
-    return comparePassword
+    return {comparePassword, authUser}
   } catch ({ message: error }) {
     throw new Error(error)
   }

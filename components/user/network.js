@@ -43,9 +43,14 @@ router.post('/auth/login',
   async (req, res) => {
     const authUser = await controller.authUser(req.body.email, req.body.password)
     const body = { email: req.body.email, password: req.body.password }
-    const token = jwt.sign(body, process.env.TOKEN)
-    return authUser
-      ? res.status(200).json({ success: true, body: token })
+    const response = {
+      success: true,
+      token: jwt.sign(body, process.env.TOKEN),
+      user: authUser.authUser,
+      message: `welcome ${req.body.email}`
+    }
+    return authUser.comparePassword
+      ? res.status(200).json({ success: true, body: response })
       : res.status(400).json({ success: false, body: 'incorrect' })
   })
 
