@@ -44,7 +44,6 @@ router.post('/auth/login',
     const authUser = await controller.authUser(req.body.email, req.body.password)
     const body = { email: req.body.email, password: req.body.password }
     const response = {
-      success: true,
       token: jwt.sign(body, process.env.TOKEN),
       user: authUser.authUser,
       message: `welcome ${req.body.email}`
