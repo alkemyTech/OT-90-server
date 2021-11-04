@@ -1,4 +1,6 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const router = express.Router()
 
@@ -40,8 +42,10 @@ router.post('/',
 router.post('/auth/login',
   async (req, res) => {
     const authUser = await controller.authUser(req.body.email, req.body.password)
+    const body = { email: req.body.email, password: req.body.password }
+    const token = jwt.sign(body, process.env.TOKEN)
     return authUser
-      ? res.status(200).json({ success: true, body: 'ok' })
+      ? res.status(200).json({ success: true, body: token })
       : res.status(400).json({ success: false, body: 'incorrect' })
   })
 
