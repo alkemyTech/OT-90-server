@@ -17,7 +17,7 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Rol: createdUser.roleId
     }
 
-    return jwt.sign(userData, process.env.TOKEN)
+    return jwt.sign(userData, process.env.JWT_SECRET_KEY)
   } catch ({ message: error }) {
     throw new Error(error)
   }
