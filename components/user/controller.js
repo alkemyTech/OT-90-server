@@ -3,14 +3,14 @@ const jwt = require('jsonwebtoken')
 const store = require('./store')
 
 const authUser = async (email, password) => {
-  try{
+  try {
     const authUser = await store.authUser(email, password)
     const hashedSaved = authUser.dataValues.password
     const comparePassword = bcryptjs.compareSync(password, hashedSaved)
     return comparePassword
-} catch ({ message: error }) {
-  throw new Error(error)
-}
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
 }
 
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
