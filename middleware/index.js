@@ -4,14 +4,15 @@ const { Role } = require('../models')
 module.exports = {
   verifyToken: (req, res, next) => {
     if (!req.headers.authorization) {
-      res.status(400).send('missing token')
+      return res.status(400).json({ success: false, body: 'missing token' })
     }
     try {
       const token = req.headers.authorization.replace('Bearer ', '')
-      jwt.verify(token, process.env.TOKEN)
-      next()
+      const decripted = jwt.verify(token, process.env.TOKEN)
+      req.token = decripted
+      return next()
     } catch (error) {
-      res.status(400).send('invalid token')
+      return res.status(400).json({ success: false, body: error })
     }
   },
   isAdmin: async (req, res, next) => {
@@ -24,7 +25,7 @@ module.exports = {
         throw new Error()
       }
     } catch (e) {
-      res.status(403).send('Your user role have not authorization to make this request')
+      res.status(403).json({ success: false, body: 'Your user role have not authorization to make this request' })
     }
   },
   validation: (schema) => async (req, res, next) => {
