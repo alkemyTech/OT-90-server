@@ -42,8 +42,18 @@ const deleteCategory = async (id) => {
   }
 }
 
+const updateCategory = async (id, body) => {
+  try {
+    const updated = await store.updateCategory(id, body)
+    return updated
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getAll,
   deleteCategory,
-  addCategory
+  addCategory,
+  updateCategory
 }
