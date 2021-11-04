@@ -43,6 +43,17 @@ const getNewsById = async (id) => {
   }
 }
 
+const deleteNew = async (newId) => {
+  try {
+    const deletedNew = await store.deleteNew(newId)
+    return deletedNew
+  } catch ({ message: error }) {
+    const response = {}
+    response.success = false
+    response.body = { error }
+    throw response
+  }
+}
 const modifyNew = async (id, reqBody) => {
   try {
     const {
@@ -61,5 +72,5 @@ const modifyNew = async (id, reqBody) => {
 }
 
 module.exports = {
-  getAll, getNewsById, addNew, modifyNew
+  getAll, getNewsById, addNew, deleteNew, modifyNew
 }

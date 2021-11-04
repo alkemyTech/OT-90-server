@@ -9,11 +9,22 @@ const router = express.Router()
 router.get('/', async (req, res) => {
   try {
     const news = await controller.getAll()
-    res.status(200).send(news)
+    res.status(200).json(news)
   } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    res.status(500).json({ Error: 'Something has gone wrong' })
   }
 })
+
+router.get('/:id', async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const news = await controller.getNewsById(id)
+    res.status(200).json(news)
+  } catch (Error) {
+    res.status(500).json({ Error: 'Something has gone wrong' })
+  }
+})
+
 router.post('/', isAdmin,
   validation(newsPostSchema),
   async (req, res) => {
@@ -30,13 +41,12 @@ router.post('/', isAdmin,
     }
   })
 
-router.get('/:id', async (req, res) => {
-  const { params: { id } } = req
+router.delete('/:id', isAdmin, async (req, res) => {
   try {
-    const news = await controller.getNewsById(id)
-    res.status(200).send(news)
-  } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    await controller.deleteNew(req.params.id)
+    res.status(204).json()
+  } catch (e) {
+    res.status(400).json(e)
   }
 })
 
