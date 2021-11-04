@@ -1,10 +1,10 @@
 const express = require('express')
 const controller = require('./controller')
 const { isAdmin, validation } = require('../../middleware/index')
-const { newsPostSchema } = require('./schema')
+const { newsPostSchema } = require('../../validate/newsSchema')
+const { newsPutSchema } = require('../../validate/newsSchema')
 
 const router = express.Router()
-const response = { success: true, body: null }
 
 router.get('/', async (req, res) => {
   try {
@@ -18,18 +18,15 @@ router.post('/', isAdmin,
   validation(newsPostSchema),
   async (req, res) => {
     try {
-      const postNew = await controller.addNew(
+      const response = await controller.addNew(
         req.body.name,
         req.body.content,
         req.body.image,
         req.body.categoryId
       )
-      response.body = postNew
-      return res.status(201).send(response)
-    } catch (e) {
-      response.success = false
-      response.body = e
-      return res.status(500).send(response)
+      return res.status(201).json(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
     }
   })
 
@@ -42,5 +39,19 @@ router.get('/:id', async (req, res) => {
     res.status(500).send({ Error: 'Something has gone wrong' })
   }
 })
+
+router.put('/:id', isAdmin,
+  validation(newsPutSchema),
+  async (req, res) => {
+    const { params: { id } } = req
+    try {
+      const response = await controller.modifyNew(
+        id, req.body
+      )
+      return res.status(201).json(response)
+    } catch (failedResponse) {
+      return res.status(500).json(failedResponse)
+    }
+  })
 
 module.exports = router
