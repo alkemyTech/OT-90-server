@@ -7,6 +7,10 @@ const controller = require('./controller')
 const { isAdmin, validation } = require('../../middleware/index')
 const { userSchema } = require('../../validate/userSchema')
 
+const response = { success: true, body: null }
+
+const { isAdmin } = require('../../middleware/index')
+
 router.get('/', isAdmin, async (req, res) => {
   try {
     const users = await controller.getAll()
@@ -27,5 +31,23 @@ router.post('/', validation(userSchema),
         res.status(400).send(error)
       })
   })
+
+router.delete('/:id', isAdmin, async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const deleted = await controller.deleteUser(id)
+    if (!deleted) {
+      response.success = false
+      response.body = { error: `A user with that ${id} was not found` }
+      return res.status(404).json(response)
+    }
+    response.body = {}
+    return res.status(204).json(response)
+  } catch (Error) {
+    response.success = false
+    response.body = { error: 'Something has gone wrong' }
+    return res.status(500).json(response)
+  }
+})
 
 module.exports = router

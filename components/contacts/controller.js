@@ -15,4 +15,13 @@ const getAll = async () => {
   }
 }
 
-module.exports = { getAll }
+const addCont = async (name, phone, email, message) => {
+  try {
+    const newCont = await store.addCont(name, phone, email, message)
+    return newCont
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+module.exports = { getAll, addCont }
