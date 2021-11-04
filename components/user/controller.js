@@ -19,9 +19,21 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Rol: createdUser.roleId
     }
     const mail = {
-      Email: createdUser.email,
-      Subject: 'Bienvenid@ a Somos Mas ONG',
-      Msg: 'Gracias por registrarse'
+      email: createdUser.email,
+      subject: 'Bienvenid@ a Somos Mas ONG',
+      msg: `
+      <h2>Gracias por registrarte en <strong>Somos Más</strong></h2>
+      <hr>
+      <h3>Este es un mensaje de agradecimiento</h3>
+      <p>
+        <ul>
+          <li>Sumate</>
+          <li>Colaborá</>
+          <li>Participá</>
+        </ul>
+      </p>
+      <footer>SomosMas.ong</footer>
+      `
     }
     await sendMail(mail)
 
