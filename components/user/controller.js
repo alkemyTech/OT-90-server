@@ -28,7 +28,7 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       Rol: createdUser.roleId
     }
 
-    return jwt.sign(userData, process.env.TOKEN)
+    return jwt.sign(userData, process.env.JWT_SECRET_KEY)
   } catch ({ message: error }) {
     throw new Error(error)
   }
@@ -53,8 +53,18 @@ const getAll = async () => {
   }
 }
 
+const deleteUser = async (id) => {
+  try {
+    const deleted = await store.deleteById(id)
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   authUser,
   newUser,
-  getAll
+  getAll,
+  deleteUser
 }

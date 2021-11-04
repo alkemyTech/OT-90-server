@@ -14,6 +14,36 @@ const addActivity = async (activity) => {
   }
 }
 
+const updateActivity = async (activity) => {
+  try {
+    const { name } = activity
+    const { content } = activity
+    const { id } = activity
+    const updatedAt = new Date()
+    await Activity.update(
+      {
+        name,
+        content,
+        updatedAt
+      },
+      { where: { id } }
+    )
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const getById = async (id) => {
+  try {
+    const activity = await Activity.findByPk(id)
+    return activity
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  addActivity
+  addActivity,
+  updateActivity,
+  getById
 }

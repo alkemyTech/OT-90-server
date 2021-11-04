@@ -12,5 +12,17 @@ const newsPostSchema = yup.object({
       .number()
   })
 })
+const newsPutSchema = yup.object({
+  body: yup.object({
+    name: yup
+      .string().max(200),
+    content: yup
+      .string(),
+    image: yup
+      .string(),
+    categoryId: yup
+      .number()
+  })
+})
 
-module.exports = { newsPostSchema }
+module.exports = { newsPostSchema, newsPutSchema }
