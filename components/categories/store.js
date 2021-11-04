@@ -31,8 +31,18 @@ const deleteById = async (id) => {
   }
 }
 
+const updateCategory = async (id, body) => {
+  try {
+    const updated = await Category.update(body, { where: { id } })
+    return updated
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getAll,
   addCategory,
-  deleteById
+  deleteById,
+  updateCategory
 }

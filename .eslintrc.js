@@ -13,6 +13,7 @@ module.exports = {
     semi: [2, 'never'],
     'no-console': 'error',
     'prefer-const': 'error',
-    'comma-dangle': [2, 'never']
+    'comma-dangle': [2, 'never'],
+    'no-shadow': 'off'
   }
 }

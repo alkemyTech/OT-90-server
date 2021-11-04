@@ -2,11 +2,12 @@ const express = require('express')
 
 const router = express.Router()
 
-const { body, validationResult } = require('express-validator')
-
 const controller = require('./controller')
 
-const { isAdmin } = require('../../middleware/index')
+const { isAdmin, validation } = require('../../middleware/index')
+const { userSchema } = require('../../validate/userSchema')
+
+const response = { success: true, body: null }
 
 router.get('/', isAdmin, async (req, res) => {
   try {
@@ -17,16 +18,8 @@ router.get('/', isAdmin, async (req, res) => {
   }
 })
 
-router.post('/',
-  body('Nombre').notEmpty(),
-  body('Apellido').notEmpty(),
-  body('Email').isEmail(),
-  body('Contraseña').isLength({ min: 5 }),
+router.post('/', validation(userSchema),
   async (req, res) => {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() })
-    }
     const {
       Nombre, Apellido, Email, Contraseña, Imagen, Rol
     } = req.body
@@ -36,5 +29,23 @@ router.post('/',
         res.status(400).send(error)
       })
   })
+
+router.delete('/:id', isAdmin, async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const deleted = await controller.deleteUser(id)
+    if (!deleted) {
+      response.success = false
+      response.body = { error: `A user with that ${id} was not found` }
+      return res.status(404).json(response)
+    }
+    response.body = {}
+    return res.status(204).json(response)
+  } catch (Error) {
+    response.success = false
+    response.body = { error: 'Something has gone wrong' }
+    return res.status(500).json(response)
+  }
+})
 
 module.exports = router

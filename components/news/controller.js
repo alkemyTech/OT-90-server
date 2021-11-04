@@ -1,5 +1,7 @@
 const store = require('./store')
 
+const response = { success: true, body: null }
+
 const getAll = async () => {
   try {
     const allNews = await store.getAll()
@@ -20,12 +22,15 @@ const getAll = async () => {
 }
 const addNew = async (name, content, image, categoryId) => {
   try {
-    const postNew = await store.addNew({
+    response.success = true
+    response.body = await store.addNew({
       name, content, image, categoryId, type: 'news'
     })
-    return postNew
+    return response
   } catch (error) {
-    throw new Error(error)
+    response.success = false
+    response.body = { error: error.message }
+    throw response
   }
 }
 
@@ -49,10 +54,23 @@ const deleteNew = async (newId) => {
     throw response
   }
 }
+const modifyNew = async (id, reqBody) => {
+  try {
+    const {
+      name, content, image, categoryId
+    } = reqBody
+    response.success = true
+    response.body = await store.modifyNew({
+      id, name, content, image, categoryId
+    })
+    return response
+  } catch (error) {
+    response.success = false
+    response.body = { error: error.message }
+    throw response
+  }
+}
 
 module.exports = {
-  getAll,
-  getNewsById,
-  addNew,
-  deleteNew
+  getAll, getNewsById, addNew, deleteNew, modifyNew
 }

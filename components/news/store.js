@@ -48,9 +48,32 @@ const deleteNew = async (newId) => {
   }
 }
 
+const modifyNew = async (newToModify) => {
+  try {
+    const { id } = newToModify
+    const { name } = newToModify
+    const { content } = newToModify
+    const { image } = newToModify
+    const { categoryId } = newToModify
+
+    const putNew = await Entries.findByPk(id)
+    putNew.name = name
+    putNew.content = content
+    putNew.image = image
+    putNew.categoryId = categoryId
+    await putNew.save()
+
+    return putNew
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getAll,
   getById,
   addNew,
-  deleteNew
+  deleteNew,
+  modifyNew
+
 }

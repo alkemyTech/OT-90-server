@@ -15,7 +15,23 @@ const getAll = async () => {
   }
 }
 
-const addCategory = async (name, description) => store.addCategory(name, description)
+const addCategory = async (name, description) => {
+  try {
+    const newCat = await store.addCategory(name, description)
+    return {
+      success: true,
+      body: {
+        id: newCat.id,
+        name: newCat.name,
+        description: newCat.description,
+        updatedAt: newCat.updatedAt,
+        createdAt: newCat.createdAt
+      }
+    }
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
 
 const deleteCategory = async (id) => {
   try {
@@ -26,8 +42,18 @@ const deleteCategory = async (id) => {
   }
 }
 
+const updateCategory = async (id, body) => {
+  try {
+    const updated = await store.updateCategory(id, body)
+    return updated
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getAll,
   deleteCategory,
-  addCategory
+  addCategory,
+  updateCategory
 }
