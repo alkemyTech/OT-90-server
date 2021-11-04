@@ -2,6 +2,17 @@ const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const store = require('./store')
 
+const authUser = async (email, password) => {
+  try{
+    const authUser = await store.authUser(email, password)
+    const hashedSaved = authUser.dataValues.password
+    const comparePassword = bcryptjs.compareSync(password, hashedSaved)
+    return comparePassword
+} catch ({ message: error }) {
+  throw new Error(error)
+}
+}
+
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
   const salt = bcryptjs.genSaltSync()
   const hashedPass = bcryptjs.hashSync(password, salt)
@@ -43,6 +54,7 @@ const getAll = async () => {
 }
 
 module.exports = {
+  authUser,
   newUser,
   getAll
 }

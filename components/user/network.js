@@ -37,4 +37,12 @@ router.post('/',
       })
   })
 
+  router.post('/auth/login',
+    async (req, res) => {
+      const authUser = await controller.authUser(req.body.email, req.body.password)
+      authUser
+        ? res.status(200).json({ success: true, body: 'ok'})
+        : res.status(400).json({ success: false, body: 'incorrect'})
+  })
+
 module.exports = router
