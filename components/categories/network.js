@@ -5,8 +5,6 @@ const categorySchema = require('../../validate/categorySchema')
 
 const router = express.Router()
 
-const response = { success: true, body: null }
-
 router.get('/', async (req, res) => {
   try {
     const categories = await controller.getAll()
@@ -32,13 +30,13 @@ router.delete('/:id', isAdmin, async (req, res) => {
   const { params: { id } } = req
   try {
     const deleted = await controller.deleteCategory(id)
-    if (!deleted) {
-      res.status(404).send({ Error: `Not founded a category with id ${id}` })
+    if (!deleted.success) {
+      res.status(404).json(deleted)
       return
     }
-    res.status(204).send()
-  } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    res.status(204).json(deleted)
+  } catch (badResponse) {
+    res.status(500).json(badResponse)
   }
 })
 
@@ -46,18 +44,13 @@ router.put('/:id', [isAdmin, validation(categorySchema)], async (req, res) => {
   const { params: { id }, body } = req
   try {
     const updated = await controller.updateCategory(id, body)
-    if (!updated[0]) {
-      response.success = false
-      response.body = { Error: `Not founded a category with id ${id}` }
-      res.status(400).json(response)
+    if (!updated.success) {
+      res.status(404).json(updated)
       return
     }
-    response.body = { ...body, id }
-    res.status(200).json(response)
-  } catch (Error) {
-    response.success = false
-    response.body = Error
-    res.status(500).json(response)
+    res.status(200).json(updated)
+  } catch (badResponse) {
+    res.status(500).json(badResponse)
   }
 })
 
