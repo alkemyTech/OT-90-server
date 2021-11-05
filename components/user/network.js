@@ -24,7 +24,7 @@ router.post('/', validation(userSchema),
       Nombre, Apellido, Email, Contraseña, Imagen, Rol
     } = req.body
     return controller.newUser(Nombre, Apellido, Email, Contraseña, Imagen, Rol)
-      .then((response) => res.status(201).send(response))
+      .then((response) => res.cookie('Authorization', `${response}`).status(201).send(response))
       .catch(({ message: error }) => {
         res.status(400).send(error)
       })
