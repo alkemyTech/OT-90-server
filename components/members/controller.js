@@ -25,4 +25,15 @@ const addMember = async (body) => {
   }
 }
 
-module.exports = { getAll, addMember }
+const deleteMember = async (id) => {
+  try {
+    return await store.deleteMember(id)
+  } catch ({ message: error }) {
+    const response = {}
+    response.success = false
+    response.body = error
+    throw (response)
+  }
+}
+
+module.exports = { getAll, addMember, deleteMember }
