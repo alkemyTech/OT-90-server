@@ -34,8 +34,7 @@ module.exports = {
           key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: false
+        onDelete: 'SET NULL'
       },
       deletedAt: {
         type: Sequelize.DATE
