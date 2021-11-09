@@ -1,13 +1,14 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
 
 const router = express.Router()
 
+const { body, validationResult } = require('express-validator')
+
 const controller = require('./controller')
 
-const { isAdmin, validation } = require('../../middleware/index')
-const { userSchema } = require('../../validate/userSchema')
-
-const response = { success: true, body: null }
+const { isAdmin } = require('../../middleware/index')
 
 router.get('/', isAdmin, async (req, res) => {
   try {
@@ -18,8 +19,16 @@ router.get('/', isAdmin, async (req, res) => {
   }
 })
 
-router.post('/', validation(userSchema),
+router.post('/',
+  body('Nombre').notEmpty(),
+  body('Apellido').notEmpty(),
+  body('Email').isEmail(),
+  body('Contraseña').isLength({ min: 5 }),
   async (req, res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
+    }
     const {
       Nombre, Apellido, Email, Contraseña, Imagen, Rol
     } = req.body
@@ -30,22 +39,18 @@ router.post('/', validation(userSchema),
       })
   })
 
-router.delete('/:id', isAdmin, async (req, res) => {
-  const { params: { id } } = req
-  try {
-    const deleted = await controller.deleteUser(id)
-    if (!deleted) {
-      response.success = false
-      response.body = { error: `A user with that ${id} was not found` }
-      return res.status(404).json(response)
+router.post('/auth/login',
+  async (req, res) => {
+    const authUser = await controller.authUser(req.body.email, req.body.password)
+    const body = { email: req.body.email, password: req.body.password }
+    const response = {
+      token: jwt.sign(body, process.env.TOKEN),
+      user: authUser.authUser,
+      message: `welcome ${req.body.email}`
     }
-    response.body = {}
-    return res.status(204).json(response)
-  } catch (Error) {
-    response.success = false
-    response.body = { error: 'Something has gone wrong' }
-    return res.status(500).json(response)
-  }
-})
+    return authUser.comparePassword
+      ? res.status(200).json({ success: true, body: response })
+      : res.status(400).json({ success: false, body: 'incorrect' })
+  })
 
 module.exports = router

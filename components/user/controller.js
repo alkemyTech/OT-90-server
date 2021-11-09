@@ -4,6 +4,17 @@ const store = require('./store')
 
 const { sendMail } = require('../marketing/index')
 
+const authUser = async (email, password) => {
+  try {
+    const authUser = await store.authUser(email, password)
+    const hashedSaved = authUser.dataValues.password
+    const comparePassword = bcryptjs.compareSync(password, hashedSaved)
+    return { comparePassword, authUser }
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
   const salt = bcryptjs.genSaltSync()
   const hashedPass = bcryptjs.hashSync(password, salt)
@@ -77,6 +88,7 @@ const deleteUser = async (id) => {
 }
 
 module.exports = {
+  authUser,
   newUser,
   getAll,
   deleteUser
