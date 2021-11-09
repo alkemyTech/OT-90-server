@@ -26,7 +26,7 @@ const modifyMember = async (memberToModify) => {
     const { id } = memberToModify
     const { name } = memberToModify
     const { image } = memberToModify
-    const putMember = await db.sequelize.models.Member.findByPk(id)
+    const putMember = await Member.findByPk(id)
     putMember.name = name
     putMember.image = image
     await putMember.save()
@@ -46,5 +46,10 @@ const deleteMember = async (id) => {
     throw new Error(error)
   }
 }
-module.exports = { getAll, addMember, deleteMember, modifyMember }
 
+module.exports = {
+  getAll,
+  addMember,
+  deleteMember,
+  modifyMember
+}
