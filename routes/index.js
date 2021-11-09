@@ -13,6 +13,7 @@ const pong = require('../components/pong/network')
 const activitiesNetwork = require('../components/activities/network')
 const marketingNetwork = require('../components/marketing/network')
 const authNetwokr = require('../components/auth/network')
+const testimonialsNetwokr = require('../components/testimonials/network')
 
 router.use('/ping', pong)
 router.use('/contacts', contactsNetwork)
@@ -24,5 +25,6 @@ router.use('/members', membersNetwork)
 router.use('/activities', activitiesNetwork)
 router.use('/marketing', marketingNetwork)
 router.use('/auth', authNetwokr)
+router.use('/testimonials', testimonialsNetwokr)
 
 module.exports = router
