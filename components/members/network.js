@@ -38,4 +38,10 @@ router.put('/:id', validation(membersPutSchema),
     }
   })
 
+router.delete('/:id', async (req, res) => {
+  controller
+    .deleteMember(req.params.id)
+    .then((message) => res.status(201).send(message))
+    .catch((error) => res.status(400).json(error))
+})
 module.exports = router

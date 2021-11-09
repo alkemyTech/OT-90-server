@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { Role } = require('../models')
+require('dotenv').config()
 
 module.exports = {
   verifyToken: (req, res, next) => {
@@ -17,8 +18,10 @@ module.exports = {
   },
   isAdmin: async (req, res, next) => {
     try {
-      const { roleid } = req.headers
-      const role = await Role.findByPk(roleid)
+      const token = req.headers.authorization.replace('Bearer ', '')
+      const decripted = jwt.verify(token, process.env.JWT_SECRET_KEY)
+      const { Rol } = decripted
+      const role = await Role.findByPk(Rol)
       if (role && role.name.toLowerCase().trim() === 'admin') {
         next()
       } else {

@@ -1,5 +1,14 @@
 const { User } = require('../../models')
 
+const authUser = async (email) => {
+  try {
+    const user = await User.findOne({ where: { email } })
+    return user
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const newUser = async (firstName, lastName, email, password, image, roleId) => {
   try {
     const userExist = await User.findOne({ where: { email } })
@@ -40,6 +49,7 @@ const deleteById = async (id) => {
 }
 
 module.exports = {
+  authUser,
   newUser,
   getAll,
   deleteById

@@ -1,8 +1,8 @@
-const db = require('../../models/index')
+const { Member } = require('../../models/index')
 
 const getAll = async () => {
   try {
-    const members = await db.sequelize.models.Member.findAll()
+    const members = await Member.findAll()
     return members
   } catch ({ message: error }) {
     throw new Error(error)
@@ -11,7 +11,7 @@ const getAll = async () => {
 
 const addMember = async (body) => {
   try {
-    const newMember = await db.sequelize.models.Member.create({
+    const newMember = await Member.create({
       name: body.name,
       image: body.image
     })
@@ -36,4 +36,15 @@ const modifyMember = async (memberToModify) => {
   }
 }
 
-module.exports = { getAll, addMember, modifyMember }
+const deleteMember = async (id) => {
+  try {
+    const member = await Member.findByPk(id)
+    if (!member) throw new Error('Can´t find user')
+    await member.destroy()
+    return { success: true, body: 'Deleted succesfully' }
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+module.exports = { getAll, addMember, deleteMember, modifyMember }
+
