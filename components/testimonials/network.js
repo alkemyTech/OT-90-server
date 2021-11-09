@@ -19,4 +19,16 @@ router.put('/:id', [isAdmin, validation(testimonialSchema)], async (req, res) =>
   }
 })
 
+router.post('/', validation(testimonialSchema), async (req, res) => {
+  controller.addTestimonial(req.body.name, req.body.image, req.body.content)
+    .then((test) => res.status(201).json(test))
+    .catch((e) => {
+      const error = {
+        success: false,
+        body: e.message
+      }
+      res.status(400).json(error)
+    })
+})
+
 module.exports = router
