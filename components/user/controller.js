@@ -35,9 +35,14 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       <footer>SomosMas.ong</footer>
       `
     }
-    await sendMail(mail)
 
-    return jwt.sign(userData, process.env.JWT_SECRET_KEY)
+    await sendMail(mail)
+    const token = jwt.sign(userData, process.env.JWT_SECRET_KEY)
+    const response = {
+      success: true,
+      body: { ...userData, token }
+    }
+    return response
   } catch ({ message: error }) {
     throw new Error(error)
   }
