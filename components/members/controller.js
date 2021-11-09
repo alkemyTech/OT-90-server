@@ -56,5 +56,5 @@ const deleteMember = async (id) => {
 }
 
 module.exports = { 
-  getAll, addMember, deleteMember, modifyMember
+  getAll, addMember, deleteMember, modifyMember 
 }
