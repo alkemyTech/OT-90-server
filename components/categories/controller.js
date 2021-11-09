@@ -9,7 +9,8 @@ const getAll = async () => {
       .map((category) => (
         {
           id: category.id,
-          name: category.name
+          name: category.name,
+          description: category.description
         }
       ))
   } catch ({ message: error }) {
