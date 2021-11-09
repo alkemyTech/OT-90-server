@@ -55,4 +55,6 @@ const deleteMember = async (id) => {
   }
 }
 
-module.exports = { getAll, addMember, deleteMember, modifyMember }
+module.exports = { 
+  getAll, addMember, deleteMember, modifyMember
+}
