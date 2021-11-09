@@ -1,5 +1,7 @@
 const store = require('./store')
 
+const response = { success: true, body: null }
+
 const getAll = async () => {
   try {
     const allMembers = await store.getAll()
@@ -25,6 +27,23 @@ const addMember = async (body) => {
   }
 }
 
+const modifyMember = async (id, reqBody) => {
+  try {
+    const {
+      name, image
+    } = reqBody
+    response.success = true
+    response.body = await store.modifyMember({
+      id, name, image
+    })
+    return response
+  } catch (error) {
+    response.success = false
+    response.body = { error: error.message }
+    throw response
+  }
+}
+
 const deleteMember = async (id) => {
   try {
     return await store.deleteMember(id)
@@ -36,4 +55,9 @@ const deleteMember = async (id) => {
   }
 }
 
-module.exports = { getAll, addMember, deleteMember }
+module.exports = {
+  getAll,
+  addMember,
+  deleteMember,
+  modifyMember
+}

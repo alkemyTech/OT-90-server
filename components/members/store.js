@@ -21,6 +21,21 @@ const addMember = async (body) => {
   }
 }
 
+const modifyMember = async (memberToModify) => {
+  try {
+    const { id } = memberToModify
+    const { name } = memberToModify
+    const { image } = memberToModify
+    const putMember = await Member.findByPk(id)
+    putMember.name = name
+    putMember.image = image
+    await putMember.save()
+    return putMember
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const deleteMember = async (id) => {
   try {
     const member = await Member.findByPk(id)
@@ -31,4 +46,10 @@ const deleteMember = async (id) => {
     throw new Error(error)
   }
 }
-module.exports = { getAll, addMember, deleteMember }
+
+module.exports = {
+  getAll,
+  addMember,
+  deleteMember,
+  modifyMember
+}
