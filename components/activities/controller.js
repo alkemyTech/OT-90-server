@@ -49,6 +49,15 @@ const getById = async (id) => {
   }
 }
 
+const getActivitiesById = async (id) => {
+  try {
+    const { dataValues: activities } = await store.getById(id) || { dataValues: {} }
+    return activities
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const updateActivity = async (activity) => {
   try {
     await store.updateActivity(activity)
@@ -65,6 +74,7 @@ const updateActivity = async (activity) => {
 module.exports = {
   addActivity,
   getById,
+  getActivitiesById,
   updateActivity,
   getAll
 }
