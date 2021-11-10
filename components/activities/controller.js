@@ -10,7 +10,7 @@ const getAll = async () => {
         {
           id: activity.id,
           name: activity.name,
-          conent: activity.content,
+          content: activity.content,
           image: activity.image
         }
       ))
