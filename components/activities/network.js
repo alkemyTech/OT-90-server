@@ -5,6 +5,15 @@ const { activityPostSchema, activityPutSchema } = require('../../validate/activi
 
 const router = express.Router()
 
+router.get('/', async (req, res) => {
+  try {
+    const news = await controller.getAll()
+    res.status(200).json(news)
+  } catch (Error) {
+    res.status(500).json({ Error: 'Something has gone wrong' })
+  }
+})
+
 router.post(
   '/',
   isAdmin,

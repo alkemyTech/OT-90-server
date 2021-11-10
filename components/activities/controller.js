@@ -2,6 +2,23 @@ const store = require('./store')
 
 const response = { success: true, body: null }
 
+const getAll = async () => {
+  try {
+    const allActivity = await store.getAll()
+    return allActivity
+      .map((activity) => (
+        {
+          id: activity.id,
+          name: activity.name,
+          content: activity.content,
+          image: activity.image
+        }
+      ))
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const addActivity = async (name, content) => {
   try {
     response.success = true
@@ -58,5 +75,6 @@ module.exports = {
   addActivity,
   getById,
   getActivitiesById,
-  updateActivity
+  updateActivity,
+  getAll
 }

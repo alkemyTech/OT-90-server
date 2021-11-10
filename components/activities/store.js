@@ -1,5 +1,14 @@
 const { Activity } = require('../../models')
 
+const getAll = async () => {
+  try {
+    const activity = await Activity.findAll()
+    return activity
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const addActivity = async (activity) => {
   try {
     const { name } = activity
@@ -45,5 +54,6 @@ const getById = async (id) => {
 module.exports = {
   addActivity,
   updateActivity,
-  getById
+  getById,
+  getAll
 }
