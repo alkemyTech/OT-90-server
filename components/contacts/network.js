@@ -1,6 +1,6 @@
 const express = require('express')
 
-const { validation, isAdmin } = require('../../middleware/index')
+const { validation } = require('../../middleware/index')
 
 const { contactPostSchema } = require('../../validate/contactSchema')
 
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-router.post('/', [validation(contactPostSchema), isAdmin],
+router.post('/', [validation(contactPostSchema)],
   async (req, res) => {
     const {
       name, phone, email, message
