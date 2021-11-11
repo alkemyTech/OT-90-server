@@ -31,4 +31,16 @@ router.post('/', validation(testimonialSchema), async (req, res) => {
     })
 })
 
+router.get('/', async (req, res) => {
+  controller.getAll()
+    .then((test) => res.status(201).json(test))
+    .catch((e) => {
+      const error = {
+        success: false,
+        body: e.message
+      }
+      res.status(404).json(error)
+    })
+})
+
 module.exports = router

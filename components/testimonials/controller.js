@@ -39,7 +39,25 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
+const getAll = async () => {
+  try {
+    const allTestimonial = await store.getAll()
+    return allTestimonial
+      .map((testimonial) => (
+        {
+          id: testimonial.id,
+          name: testimonial.name,
+          image: testimonial.image,
+          content: testimonial.content
+        }
+      ))
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
 module.exports = {
   updateTestimonial,
-  addTestimonial
+  addTestimonial,
+  getAll
 }
