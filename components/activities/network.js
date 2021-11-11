@@ -58,4 +58,14 @@ router.put(
   }
 )
 
+router.get('/:id', async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const activities = await controller.getActivitiesById(id)
+    res.status(200).json(activities)
+  } catch (Error) {
+    res.status(500).json({ Error: 'Something has gone wrong' })
+  }
+})
+
 module.exports = router

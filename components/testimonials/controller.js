@@ -60,4 +60,9 @@ module.exports = {
   updateTestimonial,
   addTestimonial,
   getAll
+
+module.exports = {
+  updateTestimonial,
+  addTestimonial
+
 }
