@@ -7,17 +7,20 @@ const getAll = async ({ limit, sort }) => {
   const sortBy = sort ? [sort.split(':')] : null
   try {
     const allNews = await store.getAll(limitNumber, sortBy)
-    return allNews
-      .map((singleNews) => (
-        {
-          id: singleNews.id,
-          name: singleNews.name,
-          image: singleNews.image,
-          createdAt: singleNews.createdAt
-        }
-      ))
-  } catch ({ message: error }) {
-    throw new Error(error)
+    response.success = true
+    response.body = allNews.map((singleNews) => (
+      {
+        id: singleNews.id,
+        name: singleNews.name,
+        image: singleNews.image,
+        createdAt: singleNews.createdAt
+      }
+    ))
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
   }
 }
 const addNew = async (name, content, image, categoryId) => {
