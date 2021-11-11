@@ -2,18 +2,18 @@ const store = require('./store')
 
 const response = { success: true, body: null }
 
-const getAll = async () => {
+const getAll = async ({ limit, sort }) => {
+  const limitNumber = Number(limit)
+  const sortBy = sort ? [sort.split(':')] : null
   try {
-    const allNews = await store.getAll()
+    const allNews = await store.getAll(limitNumber, sortBy)
     return allNews
       .map((singleNews) => (
         {
           id: singleNews.id,
           name: singleNews.name,
-          conent: singleNews.content,
           image: singleNews.image,
-          categoryId: singleNews.categoryId,
-          type: singleNews.type
+          createdAt: singleNews.createdAt
         }
       ))
   } catch ({ message: error }) {

@@ -7,8 +7,9 @@ const { newsPutSchema } = require('../../validate/newsSchema')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
+  const { query } = req
   try {
-    const news = await controller.getAll()
+    const news = await controller.getAll(query)
     res.status(200).json(news)
   } catch (Error) {
     res.status(500).json({ Error: 'Something has gone wrong' })
