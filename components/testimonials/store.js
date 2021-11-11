@@ -9,6 +9,16 @@ const updateTestimonial = async (id, body) => {
   }
 }
 
+const addTestimonial = async (name, image, content) => {
+  try {
+    const newTestimonial = await Testimonials.create({ name, image, content })
+    return newTestimonial
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
-  updateTestimonial
+  updateTestimonial,
+  addTestimonial
 }
