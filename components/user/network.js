@@ -11,9 +11,9 @@ const userSchema = require('../../validate/userSchema')
 router.get('/', isAdmin, async (req, res) => {
   try {
     const users = await controller.getAll()
-    res.status(200).send(users)
+    res.status(200).json(users)
   } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    res.status(500).json({ Error: 'Something has gone wrong' })
   }
 })
 
@@ -23,7 +23,7 @@ router.post('/', validation(userSchema),
       firstName, lastName, password, email, role
     } = req.body
     return controller.newUser(firstName, lastName, password, email, role)
-      .then((response) => res.status(201).send(response))
+      .then((response) => res.status(201).json(response))
       .catch(({ message: error }) => {
         res.status(400).json(error)
       })
@@ -46,7 +46,7 @@ router.post('/auth/login',
 router.delete('/:id', async (req, res) => {
   controller
     .deleteUser(req.params.id)
-    .then((message) => res.status(201).send(message))
+    .then((message) => res.status(201).json(message))
     .catch((error) => res.status(400).json(error))
 })
 
