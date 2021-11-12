@@ -20,6 +20,26 @@ const updateTestimonial = async (id, body) => {
   }
 }
 
+const addTestimonial = async (name, image, content) => {
+  try {
+    const newTest = await store.addTestimonial(name, image, content)
+    return {
+      success: true,
+      body: {
+        id: newTest.id,
+        name: newTest.name,
+        image: newTest.image,
+        content: newTest.content,
+        updatedAt: newTest.updatedAt,
+        createdAt: newTest.createdAt
+      }
+    }
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
 module.exports = {
-  updateTestimonial
+  updateTestimonial,
+  addTestimonial
 }
