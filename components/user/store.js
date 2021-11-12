@@ -1,4 +1,4 @@
-const { User } = require('../../models')
+const { User, Role } = require('../../models')
 
 const authUser = async (email) => {
   try {
@@ -9,10 +9,15 @@ const authUser = async (email) => {
   }
 }
 
-const newUser = async (firstName, lastName, email, password, image, roleId) => {
+const newUser = async (firstName, lastName, email, password, role) => {
   try {
     const userExist = await User.findOne({ where: { email } })
-
+    let roleId = await Role.findOne({
+      where: {
+        name: role
+      }
+    })
+    roleId = roleId.id
     if (userExist !== null) throw new Error('User already exists')
 
     const createdUser = await User.create({
@@ -20,7 +25,6 @@ const newUser = async (firstName, lastName, email, password, image, roleId) => {
       lastName,
       email,
       password,
-      image,
       roleId
     })
 
