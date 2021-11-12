@@ -65,7 +65,7 @@ module.exports = {
       message: "In eleifend quam a odio. In hac habitasse platea dictumst.",
       createdAt: new Date(),
       updatedAt: new Date()
-    }, {,
+    }, {
       name: "Giovanna",
       phone: "653-518-9071",
       email: "goliveti9@blogtalkradio.com",
