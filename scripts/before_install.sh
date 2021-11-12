@@ -14,3 +14,8 @@ else
   echo "Creating ${DIR} directory"
   mkdir ${DIR}
 fi
+
+# apply migrations
+npx sequelize-cli db:migrate
+# apply seeds
+npx sequelize-cli db:seed:all

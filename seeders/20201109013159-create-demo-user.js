@@ -10,8 +10,8 @@ module.exports = {
       password: '12341',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-01 11:09:01',
-      updatedAt: '2021-10-01 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario2',
       lastName: 'Demo2',
@@ -20,8 +20,8 @@ module.exports = {
       password: '12342',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-02 11:09:01',
-      updatedAt: '2021-10-02 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario3',
       lastName: 'Demo3',
@@ -30,8 +30,8 @@ module.exports = {
       password: '12343',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-03 11:09:01',
-      updatedAt: '2021-10-03 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario4',
       lastName: 'Demo4',
@@ -40,8 +40,8 @@ module.exports = {
       password: '12344',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-04 11:09:01',
-      updatedAt: '2021-10-04 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario5',
       lastName: 'Demo5',
@@ -50,8 +50,8 @@ module.exports = {
       password: '12345',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-05 11:09:01',
-      updatedAt: '2021-10-05 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario6',
       lastName: 'Demo6',
@@ -60,8 +60,8 @@ module.exports = {
       password: '12346',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-06 11:09:01',
-      updatedAt: '2021-10-06 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario7',
       lastName: 'Demo7',
@@ -70,8 +70,8 @@ module.exports = {
       password: '12347',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-07 11:09:01',
-      updatedAt: '2021-10-07 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario8',
       lastName: 'Demo8',
@@ -80,8 +80,8 @@ module.exports = {
       password: '12348',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-08 11:09:01',
-      updatedAt: '2021-10-08 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario9',
       lastName: 'Demo9',
@@ -90,8 +90,8 @@ module.exports = {
       password: '12349',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-09 11:09:01',
-      updatedAt: '2021-10-09 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario10',
       lastName: 'Demo10',
@@ -100,8 +100,8 @@ module.exports = {
       password: '123410',
       roleId: 1,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-10 11:09:01',
-      updatedAt: '2021-10-10 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario11',
       lastName: 'Demo11',
@@ -110,8 +110,8 @@ module.exports = {
       password: '123411',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-11 11:09:01',
-      updatedAt: '2021-10-11 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario12',
       lastName: 'Demo12',
@@ -120,8 +120,8 @@ module.exports = {
       password: '123412',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-12 11:09:01',
-      updatedAt: '2021-10-12 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario13',
       lastName: 'Demo13',
@@ -130,8 +130,8 @@ module.exports = {
       password: '123413',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-13 11:09:01',
-      updatedAt: '2021-10-13 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario14',
       lastName: 'Demo14',
@@ -140,8 +140,8 @@ module.exports = {
       password: '123414',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-14 11:09:01',
-      updatedAt: '2021-10-14 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario15',
       lastName: 'Demo15',
@@ -150,8 +150,8 @@ module.exports = {
       password: '123415',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-15 11:09:01',
-      updatedAt: '2021-10-15 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario16',
       lastName: 'Demo16',
@@ -160,8 +160,8 @@ module.exports = {
       password: '123416',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-11-16 11:09:01',
-      updatedAt: '2021-10-16 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario17',
       lastName: 'Demo17',
@@ -170,8 +170,8 @@ module.exports = {
       password: '123417',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-17 11:09:01',
-      updatedAt: '2021-10-17 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario18',
       lastName: 'Demo18',
@@ -180,8 +180,8 @@ module.exports = {
       password: '123418',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-18 11:09:01',
-      updatedAt: '2021-10-18 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario19',
       lastName: 'Demo19',
@@ -190,8 +190,8 @@ module.exports = {
       password: '123419',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-19 11:09:01',
-      updatedAt: '2021-10-19 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     },{
       firstName: 'Usuario20',
       lastName: 'Demo20',
@@ -200,8 +200,8 @@ module.exports = {
       password: '123420',
       roleId: 2,
       image: 'https://www.designevo.com/res/templates/thumb_small/colorful-hand-and-warm-community.png',
-      createdAt: '2021-10-20 11:09:01',
-      updatedAt: '2021-10-20 11:09:01'
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
   },
 
