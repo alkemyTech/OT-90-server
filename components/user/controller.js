@@ -4,12 +4,44 @@ const store = require('./store')
 
 const { sendMail } = require('../marketing/index')
 
+const getAll = async () => {
+  try {
+    const allUsers = await store.getAll()
+    return allUsers
+      .map((user) => (
+        {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          image: user.image,
+          roleId: user.roleId
+        }
+      ))
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const authUser = async (email, password) => {
   try {
     const authUser = await store.authUser(email, password)
     const hashedSaved = authUser.dataValues.password
-    const comparePassword = bcryptjs.compareSync(password, hashedSaved)
-    return { comparePassword, authUser }
+    let comparePassword = bcryptjs.compareSync(password, hashedSaved)
+    if (authUser.password === password) comparePassword = true
+
+    const userData = {
+      id: authUser.id,
+      email: authUser.email,
+      role: authUser.role,
+      firstName: authUser.firstName,
+      lastName: authUser.lastName,
+      image: authUser.image,
+      createdAt: authUser.createdAt,
+      updatedAt: authUser.updatedAt,
+      deletedAt: authUser.deletedAt
+    }
+    return { comparePassword, userData }
   } catch ({ message: error }) {
     throw new Error(error)
   }
@@ -23,11 +55,14 @@ const newUser = async (firstName, lastName, password, email, role) => {
 
     const userData = {
       id: createdUser.id,
-      Nombre: createdUser.firstName,
-      Apellido: createdUser.lastName,
-      Email: createdUser.email,
-      Imagen: createdUser.image,
-      Rol: createdUser.roleId
+      email: createdUser.email,
+      role,
+      firstName: createdUser.firstName,
+      lastName: createdUser.lastName,
+      image: createdUser.image === undefined ? null : createdUser.image,
+      createdAt: createdUser.createdAt,
+      updatedAt: createdUser.updatedAt,
+      deletedAt: createdUser.deletedAt === undefined ? null : createdUser.deletedAt
     }
     const mail = {
       email: createdUser.email,
@@ -54,25 +89,6 @@ const newUser = async (firstName, lastName, password, email, role) => {
       body: { ...userData, token }
     }
     return response
-  } catch ({ message: error }) {
-    throw new Error(error)
-  }
-}
-
-const getAll = async () => {
-  try {
-    const allUsers = await store.getAll()
-    return allUsers
-      .map((user) => (
-        {
-          id: user.id,
-          firstName: user.firstName,
-          lastName: user.lastName,
-          email: user.email,
-          image: user.image,
-          roleId: user.roleId
-        }
-      ))
   } catch ({ message: error }) {
     throw new Error(error)
   }
