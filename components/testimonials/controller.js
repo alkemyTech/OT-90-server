@@ -39,7 +39,6 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
-
 const deleteTestimonial = async (id) => {
   try {
     const deleted = await store.deleteById(id)
