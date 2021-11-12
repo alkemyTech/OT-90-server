@@ -18,10 +18,11 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
-const deleteById = async (id) => {
+const deleteTestimony = async (testimonialsId) => {
   try {
-    const deleted = await Testimonials.destroy({ where: { id } })
-    return deleted
+    const deletedTestimony = await Testimonials.destroy({ where: { id: testimonialsId } })
+    if (deletedTestimony === 0) throw new Error('Entrie not found')
+    return deletedTestimony
   } catch ({ message: error }) {
     throw new Error(error)
   }
@@ -30,5 +31,5 @@ const deleteById = async (id) => {
 module.exports = {
   updateTestimonial,
   addTestimonial,
-  deleteById
+  deleteTestimony
 }

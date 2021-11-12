@@ -39,9 +39,9 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
-const deleteTestimonial = async (id) => {
+const deleteTestimony = async (id) => {
   try {
-    const deleted = await store.deleteById(id)
+    const deleted = await store.deleteTestimony(id)
     response.success = true
     response.body = deleted
     return deleted
@@ -55,5 +55,5 @@ const deleteTestimonial = async (id) => {
 module.exports = {
   updateTestimonial,
   addTestimonial,
-  deleteTestimonial
+  deleteTestimony
 }
