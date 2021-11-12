@@ -39,7 +39,21 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
+const deleteTestimony = async (id) => {
+  try {
+    const deleted = await store.deleteTestimony(id)
+    response.success = true
+    response.body = deleted
+    return deleted
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
+  }
+}
+
 module.exports = {
   updateTestimonial,
-  addTestimonial
+  addTestimonial,
+  deleteTestimony
 }

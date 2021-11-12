@@ -31,4 +31,13 @@ router.post('/', validation(testimonialSchema), async (req, res) => {
     })
 })
 
+router.delete('/:id', isAdmin, async (req, res) => {
+  try {
+    await controller.deleteTestimony(req.params.id)
+    res.status(204).json()
+  } catch (e) {
+    res.status(400).json(e)
+  }
+})
+
 module.exports = router
