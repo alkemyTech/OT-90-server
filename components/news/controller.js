@@ -2,22 +2,25 @@ const store = require('./store')
 
 const response = { success: true, body: null }
 
-const getAll = async () => {
+const getAll = async ({ limit, sort }) => {
+  const limitNumber = Number(limit)
+  const sortBy = sort ? [sort.split(':')] : null
   try {
-    const allNews = await store.getAll()
-    return allNews
-      .map((singleNews) => (
-        {
-          id: singleNews.id,
-          name: singleNews.name,
-          conent: singleNews.content,
-          image: singleNews.image,
-          categoryId: singleNews.categoryId,
-          type: singleNews.type
-        }
-      ))
-  } catch ({ message: error }) {
-    throw new Error(error)
+    const allNews = await store.getAll(limitNumber, sortBy)
+    response.success = true
+    response.body = allNews.map((singleNews) => (
+      {
+        id: singleNews.id,
+        name: singleNews.name,
+        image: singleNews.image,
+        createdAt: singleNews.createdAt
+      }
+    ))
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
   }
 }
 const addNew = async (name, content, image, categoryId) => {

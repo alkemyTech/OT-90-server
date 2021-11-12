@@ -1,8 +1,15 @@
 const { Entries } = require('../../models/index')
 
-const getAll = async () => {
+const getAll = async (limit, sort) => {
+  const options = {
+    where: {
+      type: 'news'
+    }
+  }
+  if (limit) options.limit = limit
+  if (sort) options.order = sort
   try {
-    const news = await Entries.findAll()
+    const news = await Entries.findAll(options)
     return news
   } catch ({ message: error }) {
     throw new Error(error)
