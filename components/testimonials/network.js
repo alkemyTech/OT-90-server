@@ -31,4 +31,13 @@ router.post('/', validation(testimonialSchema), async (req, res) => {
     })
 })
 
+
+router.delete('/:id', async (req, res) => {
+  controller
+    .deleteUser(req.params.id)
+    .then((message) => res.status(201).send(message))
+    .catch((error) => res.status(400).json(error))
+})
+
+
 module.exports = router

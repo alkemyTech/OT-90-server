@@ -18,7 +18,17 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
+const deleteById = async (id) => {
+  try {
+    const deleted = await User.destroy({ where: { id } })
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   updateTestimonial,
-  addTestimonial
+  addTestimonial,
+  deleteById
 }
