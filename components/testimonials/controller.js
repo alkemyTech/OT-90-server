@@ -42,9 +42,13 @@ const addTestimonial = async (name, image, content) => {
 const deleteTestimonial = async (id) => {
   try {
     const deleted = await store.deleteById(id)
+    response.success = true
+    response.body = deleted
     return deleted
-  } catch ({ message: error }) {
-    throw new Error(error)
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
   }
 }
 
