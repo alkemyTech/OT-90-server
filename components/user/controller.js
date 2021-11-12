@@ -27,8 +27,7 @@ const authUser = async (email, password) => {
   try {
     const authUser = await store.authUser(email, password)
     const hashedSaved = authUser.dataValues.password
-    let comparePassword = bcryptjs.compareSync(password, hashedSaved)
-    if (authUser.password === password) comparePassword = true
+    const comparePassword = bcryptjs.compareSync(password, hashedSaved)
 
     const userData = {
       id: authUser.id,
