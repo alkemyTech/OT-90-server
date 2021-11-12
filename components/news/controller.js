@@ -40,9 +40,13 @@ const addNew = async (name, content, image, categoryId) => {
 const getNewsById = async (id) => {
   try {
     const { dataValues: news } = await store.getById(id) || { dataValues: {} }
-    return news
-  } catch ({ message: error }) {
-    throw new Error(error)
+    response.success = true
+    response.body = news
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
   }
 }
 
