@@ -1,5 +1,7 @@
 const store = require('./store')
 
+const response = { success: true, body: null }
+
 const getAll = async (orgID) => {
   try {
     const organization = await store.getAll(orgID)
@@ -20,4 +22,21 @@ const getAll = async (orgID) => {
   }
 }
 
-module.exports = { getAll }
+const modifyOrg = async (id, reqBody) => {
+  try {
+    const {
+      name, image
+    } = reqBody
+    response.success = true
+    response.body = await store.modifyOrg({
+      id, name, image
+    })
+    return response
+  } catch (error) {
+    response.success = false
+    response.body = { error: error.message }
+    throw response
+  }
+}
+
+module.exports = { getAll, modifyOrg }
