@@ -18,6 +18,15 @@ const addTestimonial = async (name, image, content) => {
   }
 }
 
+const getAll = async () => {
+  try {
+    const testimonial = await Testimonials.findAll()
+    return testimonial
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const deleteTestimony = async (testimonialsId) => {
   try {
     const deletedTestimony = await Testimonials.destroy({ where: { id: testimonialsId } })
@@ -31,5 +40,6 @@ const deleteTestimony = async (testimonialsId) => {
 module.exports = {
   updateTestimonial,
   addTestimonial,
+  getAll,
   deleteTestimony
 }

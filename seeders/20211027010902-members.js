@@ -5,13 +5,13 @@ module.exports = {
     await queryInterface.bulkInsert('Members', [
       {
         name: 'Julian Alvarez',
-        image: 'https://image.example001.com',
+        image: 'https://centromedicomontemar.cl/wp-content/uploads/2015/06/sin-perfil.png',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         name: 'Leonardo Ponzio',
-        image: 'https://image.example002.com',
+        image: 'https://centromedicomontemar.cl/wp-content/uploads/2015/06/sin-perfil.png',
         createdAt: new Date(),
         updatedAt: new Date()
       }], {})
