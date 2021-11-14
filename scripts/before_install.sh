@@ -7,7 +7,7 @@
 # nvm install v14
 
 # create our working directory if it does not exist
-DIR="/home/ubuntu/g90-api"
+DIR="/home/ubuntu/g90-api-2"
 if [ -d "$DIR" ]
 then
   echo "${DIR} exists"
