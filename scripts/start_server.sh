@@ -1,7 +1,7 @@
 #!/bin/bash
-sudo chmod -R 777 /home/ubuntu/g90-api
+sudo chmod -R 777 /home/ubuntu/g90-api-2
 #navigate into our working directory where we have all our github files
-cd /home/ubuntu/g90-api
+cd /home/ubuntu/g90-api-2
 
 # add npm and node to path
 # export NVM_DIR="$HOME/.nvm"
