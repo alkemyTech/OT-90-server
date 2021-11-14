@@ -16,6 +16,6 @@ else
 fi
 
 # apply migrations
-npx sequelize-cli db:migrate
+# npx sequelize-cli db:migrate
 # apply seeds
-npx sequelize-cli db:seed:all
+# npx sequelize-cli db:seed:all

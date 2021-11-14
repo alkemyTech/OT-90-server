@@ -11,7 +11,7 @@ cd /home/ubuntu/g90-api
 base64 --decode env_encrypted.txt > .env
 
 # Execute docker container for mysql
-docker-compose up -d
+# docker-compose up -d
 echo "waiting for DOCKER MYSQL CONTAINER..."
 
 while ! docker-compose exec rabbitmq /is_ready.sh; do sleep 1; done
