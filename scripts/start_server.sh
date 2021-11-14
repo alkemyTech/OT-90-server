@@ -14,7 +14,7 @@ base64 --decode env_encrypted.txt > .env
 # docker-compose up -d
 echo "waiting for DOCKER MYSQL CONTAINER..."
 
-while ! docker-compose exec rabbitmq /is_ready.sh; do sleep 1; done
+# while ! docker-compose exec rabbitmq /is_ready.sh; do sleep 1; done
 
 echo "Installing npm modeules ..."
 
