@@ -54,7 +54,7 @@ const getAll = async () => {
   } catch (error) {
     throw new Error(error.message)
   }
-} 
+}
 
 const deleteTestimony = async (id) => {
   try {
