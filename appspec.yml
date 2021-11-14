@@ -6,6 +6,9 @@ files:
     destination: /home/ubuntu/g90-api-2
 
 hooks:
+  AfterInstall:
+    - location: scripts/after_install.sh
+      runas: ubuntu
   ApplicationStop:
     - location: scripts/stop_server.sh
       runas: ubuntu
