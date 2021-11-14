@@ -5,6 +5,7 @@
 # . ~/.nvm/nvm.sh
 # install node v14
 # nvm install v14
+nvm use 14
 
 # create our working directory if it does not exist
 DIR="/home/ubuntu/g90-api-2"
