@@ -9,7 +9,13 @@ const contactPostSchema = yup.object({
     email: yup
       .string().email()
       .required()
-      .max(255)
+      .max(255),
+    phone: yup
+      .string().matches(/^(?:(?:00)?549?)?0?(?:11|[2368]\d)(?:(?=\d{0,2}15)\d{2})??\d{8}$/)
+      .required(),
+    message: yup
+      .string()
+      .required()
   })
 })
 

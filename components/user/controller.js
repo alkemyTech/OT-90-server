@@ -15,11 +15,11 @@ const authUser = async (email, password) => {
   }
 }
 
-const newUser = async (firstName, lastName, email, password, image, roleId) => {
+const newUser = async (firstName, lastName, password, email, role) => {
   const salt = bcryptjs.genSaltSync()
   const hashedPass = bcryptjs.hashSync(password, salt)
   try {
-    const createdUser = await store.newUser(firstName, lastName, email, hashedPass, image, roleId)
+    const createdUser = await store.newUser(firstName, lastName, email, hashedPass, role)
 
     const userData = {
       id: createdUser.id,

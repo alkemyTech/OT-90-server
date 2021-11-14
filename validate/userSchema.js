@@ -2,28 +2,28 @@ const yup = require('yup')
 
 const userSchema = yup.object({
   body: yup.object({
-    Nombre: yup
+    firstName: yup
       .string()
       .required()
       .max(200),
-    Apellido: yup
+    lastName: yup
       .string()
       .required()
       .max(200),
-    Email: yup
+    email: yup
       .string()
       .email()
       .required()
       .max(200),
-    Contraseña: yup
+    password: yup
       .string()
       .required()
       .max(255),
-    Rol: yup
+    role: yup
       .string()
       .required()
-      .max(2)
+      .max(8)
   })
 })
 
-module.exports = { userSchema }
+module.exports = userSchema

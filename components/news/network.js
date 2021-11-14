@@ -7,21 +7,22 @@ const { newsPutSchema } = require('../../validate/newsSchema')
 const router = express.Router()
 
 router.get('/', async (req, res) => {
+  const { query } = req
   try {
-    const news = await controller.getAll()
-    res.status(200).json(news)
-  } catch (Error) {
-    res.status(500).json({ Error: 'Something has gone wrong' })
+    const response = await controller.getAll(query)
+    res.status(200).json(response)
+  } catch (badResponse) {
+    res.status(500).json(badResponse)
   }
 })
 
 router.get('/:id', async (req, res) => {
   const { params: { id } } = req
   try {
-    const news = await controller.getNewsById(id)
-    res.status(200).json(news)
-  } catch (Error) {
-    res.status(500).json({ Error: 'Something has gone wrong' })
+    const response = await controller.getNewsById(id)
+    res.status(200).json(response)
+  } catch (badResponse) {
+    res.status(500).json(badResponse)
   }
 })
 
