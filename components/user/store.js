@@ -3,8 +3,11 @@ const { User, Role } = require('../../models')
 const authUser = async (email) => {
   try {
     const user = await User.findOne({ where: { email } })
+    const role = await Role.findByPk(user.roleId)
+    user.role = role.name
+    user.save()
     return user
-  } catch ({ message: error }) {
+  } catch (error) {
     throw new Error(error)
   }
 }
