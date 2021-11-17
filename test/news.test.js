@@ -8,7 +8,7 @@ describe("POST /news", function () {
   const dataPost = {
     name: 'testing news',
     content: 'this a test content',
-    categoryId: 2,
+    categoryId: 1,
 }
   it("post news", async function () {
     const response = await request(app).post("/news").send(dataPost)
