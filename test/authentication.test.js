@@ -22,12 +22,10 @@ let token
 
     try {
       const response = await createTestUser(userData)
-      console.log('response')
-      console.log(response)
       token = response.token
       id = response.id
     }catch (e) {
-      console.log(e)
+      return e
     }
       // runs once before the first test in this block
   });
@@ -36,7 +34,7 @@ let token
     try{ 
       await hardDelete(id)
     }catch(e){
-      console.log(e)
+      return e
     }
     // runs once after the last test in this block
   });
