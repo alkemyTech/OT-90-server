@@ -71,7 +71,7 @@ let token
       .get("/auth/me")   
       .set(header)
       
-     expect(response.body.body.Nombre).to.eql("alkemy") 
+     expect(response.body.body.firstName).to.eql("alkemy") 
      expect(response.status).to.eql(200) 
      expect(response.body.success).to.eql(true) 
     })
