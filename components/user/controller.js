@@ -26,6 +26,7 @@ const getAll = async () => {
 const authUser = async (email, password) => {
   try {
     const authUser = await store.authUser(email, password)
+    if (!authUser) return null
     const hashedSaved = authUser.dataValues.password
     const comparePassword = bcryptjs.compareSync(password, hashedSaved)
 
