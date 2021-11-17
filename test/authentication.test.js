@@ -1,6 +1,10 @@
 const request = require('supertest')
 const app = require('../app')
 const expect = require("chai").expect  
+const { createTestUser } = require('../utils/createUser')
+const { hardDelete } = require('../utils/hardDeleteUser')
+
+
 
 describe('hooks', function() {
 
@@ -17,12 +21,11 @@ let token
   before( async function() {
 
     try {
-      const response = await request(app)
-      .post("/users")   
-      .send(userData)
-      const body = response.body.body
-      token = body.token
-      id = body.id
+      const response = await createTestUser(userData)
+      console.log('response')
+      console.log(response)
+      token = response.token
+      id = response.id
     }catch (e) {
       console.log(e)
     }
@@ -31,9 +34,7 @@ let token
 
   after(async function() {
     try{ 
-      const response = await request(app)
-        .delete(`/users/${id}`)   
-        console.log('deleted')
+      await hardDelete(id)
     }catch(e){
       console.log(e)
     }
