@@ -33,6 +33,7 @@ let token
     try{ 
       const response = await request(app)
         .delete(`/users/${id}`)   
+        console.log('deleted')
     }catch(e){
       console.log(e)
     }
@@ -70,6 +71,7 @@ let token
       const response = await request(app)
       .get("/auth/me")   
       .set(header)
+      
      expect(response.body.body.Nombre).to.eql("alkemy") 
      expect(response.status).to.eql(200) 
      expect(response.body.success).to.eql(true) 
@@ -94,3 +96,5 @@ let token
   })
 
 });
+
+
