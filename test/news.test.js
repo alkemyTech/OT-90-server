@@ -35,7 +35,7 @@ describe("PUT /news", function () {
   const dataPut = {
     name: 'modifing testing news',
     content: 'modifing this a test content',
-    categoryId: 1,
+    categoryId: 2,
 }
   it("put news", async function () {
     const response = await request(app).put(`/news/${id}`).send(dataPut)
