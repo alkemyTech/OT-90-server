@@ -68,7 +68,7 @@ router.get('/:id', async (req, res) => {
   }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', isAdmin, async (req, res) => {
   controller
     .deleteActivity(req.params.id)
     .then((message) => res.status(201).json(message))

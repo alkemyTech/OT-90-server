@@ -1,5 +1,5 @@
 const CreateUser = require('../utils/createUser')
-const DeleteUser = require('../utils/hardDeleteUser')
+const Delete = require('../utils/hardDeleteUser')
 const request = require('supertest')
 const server = require('../app')
 
@@ -30,8 +30,10 @@ describe('hooks', () => {
 
   after(async () => {
     try {
-      await DeleteUser.hardDelete('User', idUser)
-      console.log(idUser, 'eliminado')
+      await Delete.hardDelete('Activity',idActivity)
+      console.log('actividad ', idActivity, ' eliminada')
+      await Delete.hardDelete('User', idUser)
+      console.log('usuario ', idUser, 'eliminado')
     } catch (e) {
       console.log(e)
     }
@@ -78,13 +80,22 @@ describe('hooks', () => {
     })
 
     describe('PUT /activities', () => {
-      it('It shoul PUT delete activity by id', (done) => {
+      it('It shoul PUT activity by id', (done) => {
         const data = { name: 'Prueba', content: 'Prueba del cambio correcto' }
         request(server)
           .put(`/activities/${idActivity}`)
           .send(data)
           .set({ authorization: token })
           .expect(200, done)
+      })
+    })
+
+    describe('DELETE /activities/id', () => {
+      it('It shoul DELETE activity by id', (done) => {
+        request(server)
+          .delete(`/activities/${idActivity}`)
+          .set({ authorization: token })
+          .expect(201, done)
       })
     })
   })
