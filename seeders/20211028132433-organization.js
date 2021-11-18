@@ -5,7 +5,7 @@ module.exports = {
     await queryInterface.bulkInsert('Organizations', [
       {
         name: 'Somos mas',
-        image: 'https://drive.google.com/file/d/1-j70Zmn2B1-0T_67JHJbNLKkI9sACMNi/view?usp=sharing',
+        image: 'https://lh4.googleusercontent.com/2s9-R5f8AneeTQzyYxcplDTGLXy6t4wjXZDu2rBnvq_PZV-tGz0y9N03S6XWmxokFY6sw3xUOLHazCa6aS34=w1360-h657',
         phone: '0114568923',
         address: 'Julieta Lanteri 1605',
         welcomeText: 'Bienvenidos a nuestro Portal',
