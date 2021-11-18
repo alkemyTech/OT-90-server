@@ -3,11 +3,11 @@ const authMe = (token) => {
     success: true,
     body: {
       id: token.id,
-      Nombre: token.Nombre,
-      Apellido: token.Apellido,
-      Email: token.Email,
-      Imagen: token.Imagen,
-      Rol: token.Rol
+      firstName: token.firstName,
+      lastName: token.lastName,
+      email: token.email,
+      image: token.image,
+      role: token.role
     }
   }
   return response
