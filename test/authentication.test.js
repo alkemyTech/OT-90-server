@@ -9,7 +9,7 @@ const { hardDelete } = require('../utils/hardDeleteUser')
 describe('hooks', function() {
 
   const userData =   {
-    email: "usuario@testingsssss.com",
+    email: "usuario@testing.com",
     password: "alkemy123",
     firstName: "alkemy",
     lastName: "bootcamp",
@@ -32,7 +32,7 @@ let token
 
   after(async function() {
     try{ 
-      await hardDelete(id)
+      await hardDelete('User',id)
     }catch(e){
       return e
     }
