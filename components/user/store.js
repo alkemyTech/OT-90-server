@@ -3,6 +3,7 @@ const { User, Role } = require('../../models')
 const authUser = async (email) => {
   try {
     const user = await User.findOne({ where: { email } })
+    if (!user) return null
     const role = await Role.findByPk(user.roleId)
     user.role = role.name
     user.save()
