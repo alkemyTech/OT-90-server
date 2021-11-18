@@ -2,7 +2,10 @@ const CreateUser = require('../utils/createUser')
 const Delete = require('../utils/hardDeleteUser')
 const request = require('supertest')
 const server = require('../app')
+const chai = require('chai')
+const expect = require('chai').expect
 
+chai.should()
 
 describe('hooks', () => {
   const userData = {
@@ -19,10 +22,9 @@ describe('hooks', () => {
   before(async () => {
     try {
       const user = await CreateUser.createTestUser(userData)
-      console.log(user)
       token = user.token
       idUser = user.dataValues.id
-      console.log(id)
+      console.log('Usuario', idUser, 'creado')
     } catch (e) {
       console.log(idUser)
     }
@@ -31,9 +33,9 @@ describe('hooks', () => {
   after(async () => {
     try {
       await Delete.hardDelete('Activity',idActivity)
-      console.log('actividad ', idActivity, ' eliminada')
+      console.log('actividad', idActivity, 'eliminada')
       await Delete.hardDelete('User', idUser)
-      console.log('usuario ', idUser, 'eliminado')
+      console.log('usuario', idUser, 'eliminado')
     } catch (e) {
       console.log(e)
     }
@@ -41,13 +43,18 @@ describe('hooks', () => {
 
   // test cases
   describe('Activities API', () => {
-  /* get / */
+    /* get / */
     describe('GET /activities', () => {
       it('It should GET all the activities', (done) => {
         request(server)
           .get('/activities')
           .set('Acept', 'application/json')
-          .expect(200, done)
+          .end((error, response) => {
+            expect(response.status).to.eql(200)
+            response.body.should.be.a('array')
+            response.body.length.should.be.eql(3)
+          done()
+          })
       })
     })
 
@@ -55,9 +62,29 @@ describe('hooks', () => {
     describe('GET /activities/id', () => {
       it('It shoul GET a activity by id', (done) => {
         request(server)
-          .get('/activities/1')
+          .get(`/activities/1`)
           .set('Acept', 'application/json')
-          .expect(200, done)
+          .end((error, response) => {
+            expect(response.status).to.eql(200)
+            response.body.should.be.a('object')
+            response.body.should.have.property('id')
+            response.body.should.have.property('name')
+            response.body.should.have.property('content')
+            response.body.should.have.property('image')
+          done()
+          })
+      })
+
+      it('It shoul NOT GET a activity by id', (done) => {
+        request(server)
+          .get(`/activities/${idActivity}`)
+          .set('Acept', 'application/json')
+          .end((error, response) => {
+            expect(response.status).to.eql(200)
+            response.body.should.be.a('object')
+            response.body.should.be.a('object').eql({})
+          done()
+          })
       })
     })
 
@@ -70,15 +97,33 @@ describe('hooks', () => {
           .post('/activities')
           .send(data)
           .set({ authorization: token })
-          .expect(201)
-          .end((err, res) => {
+          .end((err, response) => {
             if (err) done(err)
-            idActivity = res.body.body.id
-            done()
+            idActivity = response.body.body.id
+            expect(response.status).to.eql(201)
+          done()
+          })
+      })
+
+      it('It shoul NOT POST a new activity', (done) => {
+        const data = {}
+        console.log(token)
+        request(server)
+          .post('/activities')
+          .send(data)
+          .set({ authorization: token })
+          .end((err, response) => {
+            expect(response.status).to.eql(400)
+            response.body.should.have.property('type')
+            response.body.should.have.property('message')
+            response.body.should.have.property('errors')
+            response.body.should.have.property('type').eql('ValidationError')
+          done()
           })
       })
     })
 
+    /* put */
     describe('PUT /activities', () => {
       it('It shoul PUT activity by id', (done) => {
         const data = { name: 'Prueba', content: 'Prueba del cambio correcto' }
@@ -86,10 +131,20 @@ describe('hooks', () => {
           .put(`/activities/${idActivity}`)
           .send(data)
           .set({ authorization: token })
-          .expect(200, done)
+          .end((err, response) => {
+            expect(response.status).to.eql(200)
+            response.body.should.be.a('object')
+            response.body.success.should.eql(true)
+            response.body.body.should.have.property('id')
+            response.body.body.should.have.property('name')
+            response.body.body.should.have.property('content')
+            response.body.body.should.have.property('image')
+          done()
+          })
       })
     })
 
+    /* delete */
     describe('DELETE /activities/id', () => {
       it('It shoul DELETE activity by id', (done) => {
         request(server)
@@ -98,5 +153,6 @@ describe('hooks', () => {
           .expect(201, done)
       })
     })
+
   })
 })
