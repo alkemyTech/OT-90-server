@@ -11,11 +11,9 @@ const getAll = async (orgID) => {
 
 const modifyOrg = async (orgToModify) => {
   try {
-    const { id } = orgToModify
-    const { name } = orgToModify
-    const { image } = orgToModify
-
+    const { id, name, image } = orgToModify
     const putOrg = await Organization.findByPk(id)
+    if (!putOrg) return null
     putOrg.name = name
     putOrg.image = image
     await putOrg.save()
