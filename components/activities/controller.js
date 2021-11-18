@@ -71,10 +71,20 @@ const updateActivity = async (activity) => {
   }
 }
 
+const deleteActivity = async (id) => {
+  try {
+    const deleted = await store.deleteById(id)
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   addActivity,
   getById,
   getActivitiesById,
   updateActivity,
-  getAll
+  getAll,
+  deleteActivity
 }

@@ -68,4 +68,11 @@ router.get('/:id', async (req, res) => {
   }
 })
 
+router.delete('/:id', isAdmin, async (req, res) => {
+  controller
+    .deleteActivity(req.params.id)
+    .then((message) => res.status(201).json(message))
+    .catch((error) => res.status(400).json(error))
+})
+
 module.exports = router
