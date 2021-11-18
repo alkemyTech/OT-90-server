@@ -1,8 +1,8 @@
-const { User } = require('../models')
+const db = require('../models')
 
-const hardDelete = async (id) => {
+const hardDelete = async (model, id) => {
   try {
-    await User.destroy({
+    await db.sequelize.models[model].destroy({
       where: { id },
       force: true
     })
