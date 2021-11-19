@@ -7,18 +7,18 @@ const getAll = async () => {
     const allActivity = await store.getAll()
     response.success = true
     response.body = allActivity.map((activity) => (
-        {
-          id: activity.id,
-          name: activity.name,
-          content: activity.content,
-          image: activity.image
-        }
-      ))
-      return response
-  } catch ({ message: error }) {
+      {
+        id: activity.id,
+        name: activity.name,
+        content: activity.content,
+        image: activity.image
+      }
+    ))
+    return response
+  } catch ({ message }) {
     response.success = false
     response.body = { error: message }
-    throw response  
+    throw response
   }
 }
 
