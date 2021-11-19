@@ -41,4 +41,16 @@ const addCont = async (name, phone, email, message) => {
   }
 }
 
-module.exports = { getAll, addCont }
+const deleteContact = async (Id) => {
+  try {
+    const deletedContact = await store.deleteById(Id)
+    return deletedContact
+  } catch ({ message: error }) {
+    const response = {}
+    response.success = false
+    response.body = { error }
+    throw response
+  }
+}
+
+module.exports = { getAll, addCont, deleteContact }
