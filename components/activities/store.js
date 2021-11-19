@@ -51,9 +51,19 @@ const getById = async (id) => {
   }
 }
 
+const deleteById = async (id) => {
+  try {
+    const deleted = await Activity.destroy({ where: { id } })
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   addActivity,
   updateActivity,
   getById,
-  getAll
+  getAll,
+  deleteById
 }
