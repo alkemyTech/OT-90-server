@@ -1,5 +1,7 @@
+const { expect } = require('chai')
 const request = require('supertest')
 const app = require('../app')
+const { hardDelete } = require('../utils/hardDeleteUser')
 const api = request(app)
 let token
 let id
@@ -37,7 +39,12 @@ describe('POST /users/login', () => {
         .post('/users/login')
         .send(data)
         .expect('Content-Type', /json/)
-        .expect(200, done)
+        .expect(200)
+        .end((err, res) => {
+            if (err) done(err)
+            expect(res.body.success).to.eql(true) 
+            done()
+        })
     })
 })
 
@@ -57,6 +64,11 @@ describe('DELETE /users/:id', () => {
         .delete(`/users/${id}`)
         .set({ "Authorization": token})
         .expect('Content-Type', /json/)
-        .expect(201, done)
+        .expect(201)
+        .end((err, res) => {
+            if (err) done(err)
+            hardDelete('User',id)
+            done()
+        })
     })
 })
