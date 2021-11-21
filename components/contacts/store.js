@@ -24,4 +24,13 @@ const addCont = async (name, phone, email, message) => {
   }
 }
 
-module.exports = { getAll, addCont }
+const deleteById = async (id) => {
+  try {
+    const deleted = await db.sequelize.models.Contacts.destroy({ where: { id } })
+    return deleted
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+module.exports = { getAll, addCont, deleteById }

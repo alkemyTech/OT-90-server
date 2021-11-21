@@ -5,7 +5,12 @@ const response = { success: true, body: null }
 const getAll = async (orgID) => {
   try {
     const organization = await store.getAll(orgID)
-    const response = {
+    if (!organization) {
+      response.success = false
+      response.body = { Error: 'Id not found' }
+      return response
+    }
+    const body = {
       id: organization.id,
       name: organization.name,
       image: organization.image,
@@ -16,21 +21,27 @@ const getAll = async (orgID) => {
       urlLinkedin: organization.urlLinkedin,
       urlInstagram: organization.urlInstagram
     }
+    response.success = true
+    response.body = body
     return response
-  } catch ({ message: error }) {
-    throw new Error(error)
+  } catch ({ message }) {
+    response.success = false
+    response.body = { Error: message }
+    throw response
   }
 }
 
 const modifyOrg = async (id, reqBody) => {
   try {
-    const {
-      name, image
-    } = reqBody
+    const { name, image } = reqBody
     response.success = true
     response.body = await store.modifyOrg({
       id, name, image
     })
+    if (!response.body) {
+      response.success = false
+      response.body = { Error: 'Id not found' }
+    }
     return response
   } catch (error) {
     response.success = false

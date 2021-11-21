@@ -9,11 +9,11 @@ const { organizationPutSchema } = require('../../validate/organizationPutSchema'
 
 router.get('/:id/public', async (req, res) => {
   try {
-    const orgID = req.params.id
-    const organization = await controller.getAll(orgID)
-    res.status(200).send(organization)
-  } catch (Error) {
-    res.status(500).send({ Error: 'Something has gone wrong' })
+    const { id } = req.params
+    const response = await controller.getAll(id)
+    res.status(response.success ? 200 : 404).json(response)
+  } catch (badResponse) {
+    res.status(500).json(badResponse)
   }
 })
 
@@ -22,10 +22,8 @@ router.put('/:id', isAdmin,
   async (req, res) => {
     const { params: { id } } = req
     try {
-      const response = await controller.modifyOrg(
-        id, req.body
-      )
-      return res.status(201).json(response)
+      const response = await controller.modifyOrg(id, req.body)
+      return res.status(response.success ? 201 : 404).json(response)
     } catch (failedResponse) {
       return res.status(500).json(failedResponse)
     }

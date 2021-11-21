@@ -33,4 +33,13 @@ router.post('/', [validation(contactPostSchema)],
       })
   })
 
+router.delete('/:id', async (req, res) => {
+  try {
+    await controller.deleteContact(req.params.id)
+    res.status(204).json()
+  } catch (e) {
+    res.status(400).json(e)
+  }
+})
+
 module.exports = router
