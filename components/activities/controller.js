@@ -5,17 +5,20 @@ const response = { success: true, body: null }
 const getAll = async () => {
   try {
     const allActivity = await store.getAll()
-    return allActivity
-      .map((activity) => (
-        {
-          id: activity.id,
-          name: activity.name,
-          content: activity.content,
-          image: activity.image
-        }
-      ))
-  } catch ({ message: error }) {
-    throw new Error(error)
+    response.success = true
+    response.body = allActivity.map((activity) => (
+      {
+        id: activity.id,
+        name: activity.name,
+        content: activity.content,
+        image: activity.image
+      }
+    ))
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
   }
 }
 
