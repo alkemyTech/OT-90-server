@@ -29,16 +29,17 @@ router.post('/', validation(userSchema),
       })
   })
 
-  router.put('/:id',
+router.put('/:id',
   async (req, res) => {
-    const { id, firstName, lastName, image } = req.body
-    return controller.putUser(id, firstName, lastName, image )
+    const { 
+      id, firstName, lastName, image
+    } = req.body
+    return controller.putUser(id, firstName, lastName, image)
       .then((response) => res.status(201).json(response))
       .catch(({ message: error }) => {
         res.status(400).json(error)
       })
   })
-
 
 router.post('/login',
   async (req, res) => {

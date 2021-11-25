@@ -40,21 +40,13 @@ const newUser = async (firstName, lastName, email, password, role) => {
 
 const putUser = async (id, firstName, lastName, image) => {
   try {
-    /* const modifydUser = await User.update({
-      firstName: firstName,
-      lastName: lastName,
-      image: image
-    }, { where: { id }}, ) */
-    console.log("la data llega bien hasta el store", id, firstName, lastName)
-    const modifydUser = await User.findByPk(id) 
+    const modifydUser = await User.findByPk(id)
     modifydUser.firstName = firstName, 
     modifydUser.lastName = lastName, 
     modifydUser.image = image 
     await modifydUser.save()
-
     return modifydUser
   } catch (error) {
-    console.log(error)
     throw new Error(error)
   }
 }

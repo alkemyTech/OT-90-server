@@ -94,7 +94,7 @@ const newUser = async (firstName, lastName, password, email, role) => {
   }
 }
 
-const putUser = async (id, firstName, lastName, image ) => {
+const putUser = async (id, firstName, lastName, image) => {
   try {
     const modifyUser = await store.putUser(id, firstName, lastName, image)
     const response = {
@@ -103,7 +103,6 @@ const putUser = async (id, firstName, lastName, image ) => {
     }
     return response
   } catch (error) {
-    console.log(error)
     throw new Error(error)
   }
 }
