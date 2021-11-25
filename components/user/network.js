@@ -36,7 +36,7 @@ router.put('/:id',
     } = req.body
     return controller.putUser(id, firstName, lastName, image)
       .then((response) => res.status(201).json(response))
-      .catch(({ message: error }) => {
+      .catch((error) => {
         res.status(400).json(error)
       })
   })

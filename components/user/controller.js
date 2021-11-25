@@ -99,7 +99,7 @@ const putUser = async (id, firstName, lastName, image) => {
     const modifyUser = await store.putUser(id, firstName, lastName, image)
     const response = {
       success: true,
-      body: { modifyUser }
+      body: modifyUser 
     }
     return response
   } catch (error) {
