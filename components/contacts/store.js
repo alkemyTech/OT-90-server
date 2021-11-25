@@ -9,6 +9,24 @@ const getAll = async () => {
   }
 }
 
+const getById = async (id) => {
+  try {
+    const contact = await db.sequelize.models.Contacts.findOne({ where: { id } })
+    return contact
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
+const updateContact = async (id, body) => {
+  try {
+    const updated = await db.sequelize.models.Contacts.update(body, { where: { id } })
+    return updated
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 const addCont = async (name, phone, email, message) => {
   try {
     const createdContacts = await db.sequelize.models.Contacts.create({
@@ -33,4 +51,6 @@ const deleteById = async (id) => {
   }
 }
 
-module.exports = { getAll, addCont, deleteById }
+module.exports = {
+  getAll, addCont, deleteById, getById, updateContact
+}

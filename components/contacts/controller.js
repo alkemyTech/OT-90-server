@@ -1,6 +1,8 @@
 const { sendMail } = require('../marketing')
 const store = require('./store')
 
+const response = { success: true, body: null }
+
 const getAll = async () => {
   try {
     const allContacts = await store.getAll()
@@ -13,6 +15,43 @@ const getAll = async () => {
     }))
   } catch ({ message: error }) {
     throw new Error(error)
+  }
+}
+
+const getById = async (id) => {
+  try {
+    const data = await store.getById(id)
+    if (!data) {
+      response.success = false
+      response.body = { Error: 'Not found' }
+      return response
+    }
+    const { dataValues: contact } = data
+    response.success = true
+    response.body = contact
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
+  }
+}
+
+const updateContact = async (id, body) => {
+  try {
+    const updated = await store.updateContact(id, body)
+    if (!updated[0]) {
+      response.success = false
+      response.body = { error: `Not founded a category with id ${id}` }
+      return response
+    }
+    response.success = true
+    response.body = { ...body, id }
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
   }
 }
 
@@ -53,4 +92,6 @@ const deleteContact = async (Id) => {
   }
 }
 
-module.exports = { getAll, addCont, deleteContact }
+module.exports = {
+  getAll, addCont, deleteContact, getById, updateContact
+}
