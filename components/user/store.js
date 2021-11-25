@@ -45,7 +45,6 @@ const putUser = async (id, firstName, lastName, image) => {
       lastName: lastName,
       image: image
     }, { where: { id }}, ) */
-    console.log("la data llega bien hasta el store", id, firstName, lastName)
     const modifydUser = await User.findByPk(id) 
     modifydUser.firstName = firstName, 
     modifydUser.lastName = lastName, 
