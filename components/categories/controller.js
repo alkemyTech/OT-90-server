@@ -72,7 +72,6 @@ const updateCategory = async (id, body) => {
   }
 }
 
-
 const getCategoryById = async (id) => {
   try {
     const { dataValues: category } = await store.getById(id) || { dataValues: {} }

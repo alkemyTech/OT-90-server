@@ -54,7 +54,6 @@ router.put('/:id', [isAdmin, validation(categorySchema)], async (req, res) => {
   }
 })
 
-
 router.get('/:id', async (req, res) => {
   const { params: { id } } = req
   try {
