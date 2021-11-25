@@ -29,6 +29,18 @@ router.post('/', validation(userSchema),
       })
   })
 
+router.put('/:id',
+  async (req, res) => {
+    const {
+      id, firstName, lastName, image
+    } = req.body
+    return controller.putUser(id, firstName, lastName, image)
+      .then((response) => res.status(201).json(response))
+      .catch((error) => {
+        res.status(400).json(error)
+      })
+  })
+
 router.post('/login',
   async (req, res) => {
     const authUser = await controller.authUser(req.body.email, req.body.password)
