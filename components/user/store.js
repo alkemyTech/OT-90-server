@@ -41,9 +41,9 @@ const newUser = async (firstName, lastName, email, password, role) => {
 const putUser = async (id, firstName, lastName, image) => {
   try {
     const modifydUser = await User.findByPk(id)
-    modifydUser.firstName = firstName, 
-    modifydUser.lastName = lastName, 
-    modifydUser.image = image 
+    modifydUser.firstName = firstName
+    modifydUser.lastName = lastName
+    modifydUser.image = image
     await modifydUser.save()
     return modifydUser
   } catch (error) {

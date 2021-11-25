@@ -31,7 +31,7 @@ router.post('/', validation(userSchema),
 
 router.put('/:id',
   async (req, res) => {
-    const { 
+    const {
       id, firstName, lastName, image
     } = req.body
     return controller.putUser(id, firstName, lastName, image)
