@@ -45,7 +45,7 @@ const putUser = async (id, firstName, lastName, image) => {
       lastName: lastName,
       image: image
     }, { where: { id }}, ) */
-
+    console.log("la data llega bien hasta el store", id, firstName, lastName)
     const modifydUser = await User.findByPk(id) 
     modifydUser.firstName = firstName, 
     modifydUser.lastName = lastName, 
@@ -53,7 +53,8 @@ const putUser = async (id, firstName, lastName, image) => {
     await modifydUser.save()
 
     return modifydUser
-  } catch ({ message: error }) {
+  } catch (error) {
+    console.log(error)
     throw new Error(error)
   }
 }
