@@ -54,4 +54,15 @@ router.put('/:id', [isAdmin, validation(categorySchema)], async (req, res) => {
   }
 })
 
+
+router.get('/:id', async (req, res) => {
+  const { params: { id } } = req
+  try {
+    const response = await controller.getCategoryById(id)
+    res.status(200).json(response)
+  } catch (badResponse) {
+    res.status(500).json(badResponse)
+  }
+})
+
 module.exports = router

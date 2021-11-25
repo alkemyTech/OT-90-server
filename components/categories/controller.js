@@ -72,9 +72,24 @@ const updateCategory = async (id, body) => {
   }
 }
 
+
+const getCategoryById = async (id) => {
+  try {
+    const { dataValues: category } = await store.getById(id) || { dataValues: {} }
+    response.success = true
+    response.body = category
+    return response
+  } catch ({ message }) {
+    response.success = false
+    response.body = { error: message }
+    throw response
+  }
+}
+
 module.exports = {
   getAll,
   deleteCategory,
   addCategory,
-  updateCategory
+  updateCategory,
+  getCategoryById
 }
