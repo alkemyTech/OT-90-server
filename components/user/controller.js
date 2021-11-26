@@ -96,11 +96,23 @@ const newUser = async (firstName, lastName, password, email, role) => {
 
 const putUser = async (id, firstName, lastName, image) => {
   try {
-    const modifyUser = await store.putUser(id, firstName, lastName, image)
+    const data = await store.putUser(id, firstName, lastName, image)
+
+    const modifydUser = {
+      id: data.modifydUser.id,
+      firstName: data.modifydUser.firstName,
+      lastName: data.modifydUser.lastName,
+      email: data.modifydUser.email,
+      image: data.modifydUser.image,
+      role: data.roleName
+    }
+
+    const token = jwt.sign(modifydUser, process.env.JWT_SECRET_KEY)
     const response = {
       success: true,
-      body: modifyUser
+      body: { modifydUser, token }
     }
+
     return response
   } catch (error) {
     throw new Error(error)
