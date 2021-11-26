@@ -40,9 +40,19 @@ const updateCategory = async (id, body) => {
   }
 }
 
+const getById = async (id) => {
+  try {
+    const category = await await Category.findOne({ where: { id } })
+    return category
+  } catch ({ message: error }) {
+    throw new Error(error)
+  }
+}
+
 module.exports = {
   getAll,
   addCategory,
   deleteById,
-  updateCategory
+  updateCategory,
+  getById
 }
