@@ -41,11 +41,13 @@ const newUser = async (firstName, lastName, email, password, role) => {
 const putUser = async (id, firstName, lastName, image) => {
   try {
     const modifydUser = await User.findByPk(id)
+    const role = await Role.findByPk(modifydUser.roleId)
+    const roleName = role.name
     modifydUser.firstName = firstName
     modifydUser.lastName = lastName
     modifydUser.image = image
     await modifydUser.save()
-    return modifydUser
+    return { modifydUser, roleName }
   } catch (error) {
     throw new Error(error)
   }
