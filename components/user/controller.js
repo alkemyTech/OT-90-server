@@ -94,6 +94,19 @@ const newUser = async (firstName, lastName, password, email, role) => {
   }
 }
 
+const putUser = async (id, firstName, lastName, image) => {
+  try {
+    const modifyUser = await store.putUser(id, firstName, lastName, image)
+    const response = {
+      success: true,
+      body: modifyUser
+    }
+    return response
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const deleteUser = async (id) => {
   try {
     const deleted = await store.deleteById(id)
@@ -107,5 +120,6 @@ module.exports = {
   authUser,
   newUser,
   getAll,
+  putUser,
   deleteUser
 }
